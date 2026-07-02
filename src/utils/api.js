@@ -144,3 +144,27 @@ export async function updateInvoiceStatus(id, status) {
     body: JSON.stringify({ status })
   });
 }
+
+// ── Protocols ─────────────────────────────────────
+
+export async function getProtocols() {
+  return request('/protocols');
+}
+
+export async function createProtocol(data) {
+  return request('/protocols', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+}
+
+export async function updateProtocol(id, data) {
+  return request(`/protocols/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+}
+
+export async function deleteProtocol(id) {
+  return request(`/protocols/${id}`, { method: 'DELETE' });
+}

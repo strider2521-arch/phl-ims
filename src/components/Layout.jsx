@@ -5,6 +5,7 @@ import { useTheme } from "../contexts/ThemeContext";
 
 const NAV = [
   { id: "dashboard", label: "Dashboard", icon: "⬡" },
+  { id: "protocols", label: "Protocols", icon: "◈" },
   { id: "inventory", label: "Inventory", icon: "⊟" },
   { id: "invoices", label: "Invoices", icon: "⊞" },
   { id: "settings", label: "Settings", icon: "⚙" },
