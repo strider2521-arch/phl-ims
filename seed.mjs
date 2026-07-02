@@ -7,6 +7,7 @@
 // Usage: npm run seed
 // Reads DATABASE_URL from .env (if present) or the environment.
 
+import crypto from 'crypto';
 import { readFileSync } from 'fs';
 import pg from 'pg';
 const { Pool } = pg;

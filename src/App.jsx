@@ -9,6 +9,7 @@ import Invoices from "./pages/Invoices";
 import CreateInvoice from "./pages/CreateInvoice";
 import Settings from "./pages/Settings";
 import Layout from "./components/Layout";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { login as apiLogin, logout as apiLogout, loadData, getStoredUser } from "./utils/api";
 
 function AppContent() {
@@ -33,6 +34,11 @@ function AppContent() {
     try {
       const u = await apiLogin(username, password);
       setUser(u);
+      // Reload data now that we have a valid session token
+      try {
+        const fresh = await loadData();
+        setData(fresh);
+      } catch { /* keep fallback data */ }
       return true;
     } catch {
       return false;
@@ -73,7 +79,9 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <ErrorBoundary>
+        <AppContent />
+      </ErrorBoundary>
     </ThemeProvider>
   );
 }

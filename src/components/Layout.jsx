@@ -29,9 +29,9 @@ export default function Layout({ children, page, setPage }) {
     @media (max-width: 768px) {
       .pims-root { flex-direction: column; }
       .pims-sidebar { position: fixed; top: 0; left: 0; z-index: 100; transform: translateX(-100%); transition: transform 0.25s ease; }
-      .pims-sidebar.open { transform: translateX(0); }
+      .pims-sidebar.open { transform: translateX(0); background: ${theme.bg} !important; }
       .pims-main { padding: 16px; padding-top: 56px; }
-      .pims-hamburger { display: block; position: fixed; top: 10px; left: 10px; z-index: 200; }
+      .pims-hamburger { display: block; position: fixed; top: 10px; left: 10px; z-index: 200; background: ${theme.bgSecondary}; border-radius: 6px; }
     }
   `;
 
