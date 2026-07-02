@@ -97,6 +97,7 @@ CREATE INDEX IF NOT EXISTS idx_invoice_items_invoice ON invoice_items(invoice_id
 CREATE INDEX IF NOT EXISTS idx_stock_history_item ON stock_history(item_id);
 CREATE INDEX IF NOT EXISTS idx_stock_history_date ON stock_history(date DESC);
 CREATE INDEX IF NOT EXISTS idx_invoices_number ON invoices(number);
+CREATE INDEX IF NOT EXISTS idx_protocols_item ON protocols(item_id);
 
 -- ── Row Level Security ────────────────────────────────────────
 --

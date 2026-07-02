@@ -1,5 +1,5 @@
 import { verifyToken } from '../lib/auth.js';
-import { withClient, mapItem, mapGroup, mapInvoice, mapStockHistory } from '../lib/db.js';
+import { withClient, mapItem, mapGroup, mapInvoice, mapStockHistory, toCamelAll } from '../lib/db.js';
 
 function requireAuth(req) {
   const auth = req.headers.authorization || '';
@@ -14,11 +14,12 @@ export default async function handler(req, res) {
   try {
     requireAuth(req);
     const result = await withClient(async (client) => {
-      const [groups, items, invoicesRaw, stockHistory] = await Promise.all([
+      const [groups, items, invoicesRaw, stockHistory, protocolsRaw] = await Promise.all([
         client.query('SELECT * FROM product_groups ORDER BY name'),
         client.query('SELECT * FROM items ORDER BY name'),
         client.query('SELECT * FROM invoices ORDER BY number'),
         client.query('SELECT * FROM stock_history ORDER BY date DESC LIMIT 500'),
+        client.query('SELECT p.*, i.sku as item_sku, i.name as item_name FROM protocols p LEFT JOIN items i ON i.id = p.item_id ORDER BY p.name').catch(() => ({ rows: [] })),
       ]);
       const invoices = [];
       for (const inv of invoicesRaw.rows) {
@@ -30,6 +31,7 @@ export default async function handler(req, res) {
         items: items.rows.map(mapItem),
         invoices,
         stockHistory: stockHistory.rows.map(mapStockHistory),
+        protocols: toCamelAll(protocolsRaw.rows),
       };
     });
     return res.json(result);

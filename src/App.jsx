@@ -28,7 +28,7 @@ function AppContent() {
   useEffect(() => {
     const stored = getStoredUser();
     if (stored) setUser(stored);
-    loadData().then(setData).catch(() => setData({ groups: [], items: [], invoices: [], stockHistory: [] }));
+    loadData().then(setData).catch(() => setData({ groups: [], items: [], invoices: [], stockHistory: [], protocols: [] }));
   }, []);
 
   const login = async (username, password) => {

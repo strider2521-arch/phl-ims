@@ -1,31 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useData } from "../contexts/DataContext";
 import { useTheme } from "../contexts/ThemeContext";
 import * as api from "../utils/api";
 
 export default function Protocols() {
-  const { data } = useData();
+  const { data, refreshData } = useData();
   const { theme } = useTheme();
-  const [protocols, setProtocols] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const protocols = data?.protocols || [];
   const [editProto, setEditProto] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [expanded, setExpanded] = useState(null);
+  const [error, setError] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   const [form, setForm] = useState({
     itemId: "", name: "", description: "", reconstitution: "",
     dosage: "", administration: "", storage: "", sourceRefs: ""
   });
-
-  const loadProtocols = async () => {
-    try {
-      const p = await api.getProtocols();
-      setProtocols(p);
-    } catch { /* silent */ }
-    setLoading(false);
-  };
-
-  useEffect(() => { loadProtocols(); }, []);
 
   const g = (k) => `1px solid ${theme.border}`;
   const inputStyle = {
@@ -50,9 +41,9 @@ export default function Protocols() {
 
   const openEdit = (p) => {
     setForm({
-      itemId: p.item_id || "", name: p.name || "", description: p.description || "",
+      itemId: p.itemId || "", name: p.name || "", description: p.description || "",
       reconstitution: p.reconstitution || "", dosage: p.dosage || "",
-      administration: p.administration || "", storage: p.storage || "", sourceRefs: p.source_refs || ""
+      administration: p.administration || "", storage: p.storage || "", sourceRefs: p.sourceRefs || ""
     });
     setEditProto(p);
     setShowForm(true);
@@ -60,6 +51,8 @@ export default function Protocols() {
 
   const save = async () => {
     if (!form.name.trim()) return;
+    setError(null);
+    setSaving(true);
     try {
       if (editProto) {
         await api.updateProtocol(editProto.id, form);
@@ -67,16 +60,23 @@ export default function Protocols() {
         await api.createProtocol(form);
       }
       setShowForm(false);
-      await loadProtocols();
+      await refreshData();
     } catch (e) {
-      alert('Failed: ' + e.message);
+      setError(e.message || 'Failed to save protocol');
+    } finally {
+      setSaving(false);
     }
   };
 
   const del = async (id) => {
     if (!confirm("Delete this protocol entry?")) return;
-    await api.deleteProtocol(id);
-    await loadProtocols();
+    setError(null);
+    try {
+      await api.deleteProtocol(id);
+      await refreshData();
+    } catch (e) {
+      setError(e.message || 'Failed to delete protocol');
+    }
   };
 
   const section = (label, content) => {
@@ -89,7 +89,7 @@ export default function Protocols() {
     );
   };
 
-  const unusedItems = data.items.filter(i => !protocols.some(p => p.item_id === i.id));
+  const unusedItems = (data?.items || []).filter(i => !protocols.some(p => p.itemId === i.id));
 
   const Field = ({ label, children }) => (
     <div style={{ marginBottom: 12 }}>
@@ -98,7 +98,7 @@ export default function Protocols() {
     </div>
   );
 
-  if (loading) return null;
+  if (!data) return null;
 
   return (
     <div>
@@ -109,6 +109,19 @@ export default function Protocols() {
         </div>
         <button style={btnPrimary} onClick={openNew}>+ New Protocol</button>
       </div>
+
+      {error && (
+        <div style={{
+          marginBottom: 16, padding: "12px 16px", background: theme.dangerBg,
+          border: `1px solid ${theme.dangerBorder}`, borderRadius: 8,
+          display: "flex", justifyContent: "space-between", alignItems: "center"
+        }}>
+          <span style={{ fontSize: 13, color: theme.danger }}>{error}</span>
+          <button onClick={() => setError(null)} style={{
+            background: "none", border: "none", color: theme.danger, cursor: "pointer", fontSize: 16, padding: "0 4px"
+          }}>×</button>
+        </div>
+      )}
 
       {protocols.length === 0 && (
         <div style={{ textAlign: "center", padding: 60, color: theme.textSecondary }}>
@@ -121,7 +134,7 @@ export default function Protocols() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))", gap: 16 }}>
         {protocols.map(p => {
           const isExpanded = expanded === p.id;
-          const linkedItem = data.items.find(i => i.id === p.item_id);
+          const linkedItem = data.items.find(i => i.id === p.itemId);
           return (
             <div key={p.id} style={{
               background: theme.glass, border: `1px solid ${theme.glassBorder}`,
@@ -164,8 +177,8 @@ export default function Protocols() {
                   {section("Dosage Suggestions", p.dosage)}
                   {section("Administration", p.administration)}
                   {section("Storage", p.storage)}
-                  {section("References", p.source_refs)}
-                  {!p.reconstitution && !p.dosage && !p.administration && !p.storage && !p.source_refs && (
+                  {section("References", p.sourceRefs)}
+                  {!p.reconstitution && !p.dosage && !p.administration && !p.storage && !p.sourceRefs && (
                     <div style={{ fontSize: 12, color: theme.textMuted, textAlign: "center", padding: 12 }}>No details added yet — click Edit to add content.</div>
                   )}
                 </div>
@@ -201,8 +214,8 @@ export default function Protocols() {
                 }}>
                   <option value="">— Select an item —</option>
                   {data.items.map(i => (
-                    <option key={i.id} value={i.id} disabled={protocols.some(p => p.item_id === i.id)}>
-                      {i.name} ({i.sku}) {protocols.some(p => p.item_id === i.id) ? '— already has protocol' : ''}
+                    <option key={i.id} value={i.id} disabled={protocols.some(p => p.itemId === i.id)}>
+                      {i.name} ({i.sku}) {protocols.some(p => p.itemId === i.id) ? '— already has protocol' : ''}
                     </option>
                   ))}
                 </select>
@@ -241,7 +254,9 @@ export default function Protocols() {
 
             <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", marginTop: 24 }}>
               <button style={btnSecondary} onClick={() => setShowForm(false)}>Cancel</button>
-              <button style={btnPrimary} onClick={save}>{editProto ? "Save Changes" : "Create Protocol"}</button>
+              <button style={{ ...btnPrimary, opacity: saving ? 0.6 : 1 }} onClick={save} disabled={saving}>
+                {saving ? "Saving…" : editProto ? "Save Changes" : "Create Protocol"}
+              </button>
             </div>
           </div>
         </div>
