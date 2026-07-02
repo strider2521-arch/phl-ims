@@ -75,11 +75,13 @@ export default function CreateInvoice({ setPage, editingInvoice, setEditingInvoi
     const err = validate();
     if (err) { setError(err); return; }
 
+    const settings = JSON.parse(localStorage.getItem('pims_settings') || '{}');
     const payload = {
       customer,
       date,
       status,
       notes,
+      invoicePrefix: settings.invoicePrefix || 'INV-',
       discountAmount: discountVal,
       items: lines.map(l => ({ itemId: l.itemId, sku: l.sku, name: l.name, qty: l.qty, unitPrice: l.unitPrice }))
     };

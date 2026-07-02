@@ -22,6 +22,8 @@ export default function Settings() {
   const { theme } = useTheme();
   const settings = loadSettings();
   const [logo, setLogo] = useState(settings.logo || '');
+  const [logoWidth, setLogoWidth] = useState(settings.logoWidth || 120);
+  const [invoicePrefix, setInvoicePrefix] = useState(settings.invoicePrefix || 'INV-');
   const [companyName, setCompanyName] = useState(settings.companyName || 'Prime Helix');
   const [companyEmail, setCompanyEmail] = useState(settings.companyEmail || '');
   const [companyAddress, setCompanyAddress] = useState(settings.companyAddress || '');
@@ -40,7 +42,7 @@ export default function Settings() {
   }
 
   function handleSave() {
-    saveSettings({ logo, companyName, companyEmail, companyAddress, defaultNotes });
+    saveSettings({ logo, logoWidth, invoicePrefix, companyName, companyEmail, companyAddress, defaultNotes });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   }
@@ -71,9 +73,9 @@ export default function Settings() {
 
       {/* Logo */}
       <Section theme={theme} title="Invoice Logo">
-        <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 12 }}>
           {logo ? (
-            <img src={logo} alt="Company logo" style={{ maxWidth: 120, maxHeight: 60, objectFit: "contain" }} />
+            <img src={logo} alt="Company logo" style={{ width: logoWidth, maxHeight: 80, objectFit: "contain" }} />
           ) : (
             <div style={{ width: 120, height: 60, background: theme.bgTertiary, border: `1px dashed ${theme.border}`, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: theme.textSecondary }}>No logo</div>
           )}
@@ -83,10 +85,21 @@ export default function Settings() {
           </label>
           {logo && <button style={{ ...btnSecondary, color: theme.danger, borderColor: theme.dangerBorder }} onClick={() => setLogo('')}>Remove</button>}
         </div>
+        {logo && (
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 11, color: theme.textSecondary, whiteSpace: "nowrap" }}>Width: {logoWidth}px</span>
+            <input type="range" min="40" max="300" value={logoWidth}
+              onChange={e => setLogoWidth(Number(e.target.value))}
+              style={{ flex: 1, accentColor: theme.accent }} />
+          </div>
+        )}
       </Section>
 
       {/* Invoice Defaults */}
       <Section theme={theme} title="Invoice Defaults">
+        <Field theme={theme} label="Invoice Number Prefix">
+          <input style={inputStyle(theme)} value={invoicePrefix} onChange={e => setInvoicePrefix(e.target.value)} placeholder="e.g. INV-" />
+        </Field>
         <Field theme={theme} label="Default Notes (appears on every new invoice)">
           <textarea style={{ ...inputStyle(theme), resize: "vertical" }} rows={3} value={defaultNotes} onChange={e => setDefaultNotes(e.target.value)} placeholder="Payment terms, delivery notes..." />
         </Field>

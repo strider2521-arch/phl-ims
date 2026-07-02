@@ -49,12 +49,16 @@ export default function Invoices({ setPage, setEditingInvoice }) {
     const disc = inv.discountAmount || 0;
     const total = Math.max(0, subtotal - disc);
     const discPct = subtotal > 0 ? (disc / subtotal * 100) : 0;
+    const settings = JSON.parse(localStorage.getItem('pims_settings') || '{}');
+    const logoUrl = settings.logo || '';
+    const logoWidth = settings.logoWidth || 120;
+    const companyName = settings.companyName || 'PRIME HELIX';
     const win = window.open("", "_blank");
     win.document.write(`
       <html><head><title>${inv.number}</title>
       <style>
         body { font-family: Inter, sans-serif; max-width: 700px; margin: 40px auto; color: #111; }
-        h1 { font-size: 28px; } .meta { color: #666; font-size: 13px; }
+        h1 { font-size: 28px; margin:0; } .meta { color: #666; font-size: 13px; }
         table { width: 100%; border-collapse: collapse; margin: 24px 0; }
         th { background: #f5f5f5; padding: 10px; text-align: left; font-size: 12px; }
         td { padding: 10px; border-bottom: 1px solid #eee; font-size: 13px; }
@@ -62,7 +66,11 @@ export default function Invoices({ setPage, setEditingInvoice }) {
         @media print { button { display: none; } }
       </style></head><body>
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px">
-        <div><div style="font-size:11px;letter-spacing:3px;color:#2563EB;margin-bottom:6px">PRIME HELIX</div><h1 style="margin:0">${inv.number}</h1><div class="meta">${inv.date} · ${inv.status.toUpperCase()}</div></div>
+        <div>
+          ${logoUrl ? `<img src="${logoUrl}" style="width:${logoWidth}px;max-height:80px;object-fit:contain;margin-bottom:8px" />` : `<div style="font-size:11px;letter-spacing:3px;color:#2563EB;margin-bottom:6px">${companyName}</div>`}
+          <h1 style="margin:4px 0 0 0">${inv.number}</h1>
+          <div class="meta">${inv.date} · ${inv.status.toUpperCase()}</div>
+        </div>
         <div style="text-align:right"><div style="font-weight:600">${inv.customer.name}</div><div class="meta">${inv.customer.email || ""}</div><div class="meta">${inv.customer.address || ""}</div></div>
       </div>
       <table><thead><tr><th>SKU</th><th>Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead><tbody>

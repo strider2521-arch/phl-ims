@@ -38,7 +38,8 @@ export default async function handler(req, res) {
       }
 
       const { rows: seqRows } = await client.query("SELECT nextval('invoice_number_seq') AS n");
-      const invNum = `INV-${String(seqRows[0].n).padStart(3, '0')}`;
+      const prefix = b.invoicePrefix || 'INV-';
+      const invNum = `${prefix}${String(seqRows[0].n).padStart(3, '0')}`;
 
       await client.query(
         'INSERT INTO invoices (id, number, customer_name, customer_email, customer_address, date, status, notes, discount_amount) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
