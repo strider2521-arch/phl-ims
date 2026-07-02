@@ -422,8 +422,8 @@ export default function KnowledgeBase() {
           style={{ padding: "8px 12px", background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.text, fontSize: 13, outline: "none", width: 260, borderRadius: 6 }} />
         <select value={filterCat} onChange={e => setFilterCat(e.target.value)}
           style={{ padding: "8px 12px", background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.text, fontSize: 13, outline: "none", borderRadius: 6 }}>
-          <option value="all">All Categories</option>
-          {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+          <option value="all" style={{ background: theme.bgSecondary, color: theme.text }}>All Categories</option>
+          {CATEGORIES.map(c => <option key={c} style={{ background: theme.bgSecondary, color: theme.text }}>{c}</option>)}
         </select>
         <span style={{ fontSize: 12, color: theme.textMuted }}>{filtered.length} document{filtered.length !== 1 ? "s" : ""}</span>
       </div>
@@ -503,7 +503,7 @@ export default function KnowledgeBase() {
 
             <Field label="Category">
               <select style={inputStyle} value={formCat} onChange={e => setFormCat(e.target.value)}>
-                {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                {CATEGORIES.map(c => <option key={c} style={{ background: theme.bgSecondary, color: theme.text }}>{c}</option>)}
               </select>
             </Field>
 
@@ -511,18 +511,18 @@ export default function KnowledgeBase() {
               SECTIONS — fill in what you need, leave blank what you don't
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {TEMPLATE_SECTIONS.map(t => (
-                <details key={t.key} style={{ marginBottom: 4, border: `1px solid ${theme.border}`, borderRadius: 6, overflow: "hidden" }}>
-                  <summary style={{
+                <div key={t.key} style={{ border: `1px solid ${theme.border}`, borderRadius: 6, overflow: "hidden" }}>
+                  <div style={{
                     padding: "8px 12px", fontSize: 12, fontWeight: 600, color: theme.text,
-                    background: theme.bgTertiary, cursor: "pointer", display: "flex", alignItems: "center", gap: 8
+                    background: theme.bgTertiary, display: "flex", alignItems: "center", gap: 8
                   }}>
                     <span style={{ color: formSections[t.key]?.trim() ? theme.accent : theme.textMuted }}>
                       {formSections[t.key]?.trim() ? "●" : "○"}
                     </span>
                     {t.label}
-                  </summary>
+                  </div>
                   <div style={{ padding: "8px 12px" }}>
                     <textarea style={textareaStyle} rows={4} value={formSections[t.key] || ""}
                       onChange={e => setFormSections(f => ({ ...f, [t.key]: e.target.value }))}
@@ -531,7 +531,7 @@ export default function KnowledgeBase() {
                       Supports: • bullets · → notes · ┌──┐ tables · label: value | chips
                     </div>
                   </div>
-                </details>
+                </div>
               ))}
             </div>
 
