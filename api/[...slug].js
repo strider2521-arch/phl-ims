@@ -37,12 +37,25 @@ function badRequest(res, message) {
 export default async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
 
+  // Handle CORS preflight (browsers send OPTIONS before PUT/DELETE)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   // Vercel's catch-all req.query.slug isn't always reliable, so parse the
   // path from the raw URL instead.
   const path = req.url.split('?')[0].replace(/^\/api\/?/, '').split('/').filter(Boolean);
   const method = req.method;
   const [resource, id, sub] = path;
-  const b = req.body && typeof req.body === 'object' ? req.body : {};
+
+  // Parse request body manually — Vercel doesn't always parse req.body
+  // for PUT/DELETE methods in older Node runtimes.
+  let b = {};
+  if (req.body && typeof req.body === 'object') {
+    b = req.body;
+  } else if (typeof req.body === 'string') {
+    try { b = JSON.parse(req.body); } catch {}
+  }
 
   try {
     // ── Login (no auth required) ──────────────────────────────
@@ -326,7 +339,7 @@ export default async function handler(req, res) {
       }
     }
 
-    return res.status(404).json({ error: 'Not found', path, method });
+    return res.status(404).json({ error: `Not found: ${method} /${path.join('/')}`, path, method, resource, id });
   } catch (err) {
     if (err.status === 401) return res.status(401).json({ error: 'Unauthorized' });
     const status = err.status || 500;
