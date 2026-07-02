@@ -108,16 +108,16 @@ export default function Dashboard({ setPage }) {
           <div style={{ fontSize: 12, color: theme.text, fontWeight: 600 }}>Stock by Group</div>
         </div>
         <div style={{ padding: "16px 20px", display: "flex", gap: 14, flexWrap: "wrap" }}>
-          {data.groups.map(g => {
-            const items = data.items.filter(i => i.groupId === g.id);
+          {data.groups.map(grp => {
+            const items = data.items.filter(i => i.groupId === grp.id);
             const total = items.reduce((s, i) => s + i.qty, 0);
             const hasLow = items.some(i => i.qty <= i.lowStockThreshold);
             return (
-              <div key={g.id} style={{
+              <div key={grp.id} style={{
                 flex: "1 1 160px", background: theme.bgTertiary, border: hasLow ? `1px solid ${theme.dangerBorder}` : g('border'),
                 borderRadius: 8, padding: "14px",
               }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: theme.text, marginBottom: 4 }}>{g.name}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: theme.text, marginBottom: 4 }}>{grp.name}</div>
                 <div style={{ fontSize: 11, color: theme.textSecondary, marginBottom: 10 }}>{items.length} SKUs</div>
                 <div style={{ fontSize: 22, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", color: hasLow ? theme.danger : theme.accent }}>{total}</div>
                 <div style={{ fontSize: 10, color: theme.textMuted }}>total units</div>
