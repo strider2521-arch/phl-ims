@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS protocols (
   dosage TEXT DEFAULT '',
   administration TEXT DEFAULT '',
   storage TEXT DEFAULT '',
-  references TEXT DEFAULT '',
+  source_refs TEXT DEFAULT '',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   CONSTRAINT unique_protocol_per_item UNIQUE (item_id)

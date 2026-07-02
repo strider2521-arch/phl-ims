@@ -33,10 +33,10 @@ export default async function handler(req, res) {
       const id = crypto.randomUUID();
       await withClient((client) =>
         client.query(
-          `INSERT INTO protocols (id, item_id, name, description, reconstitution, dosage, administration, storage, references)
+          `INSERT INTO protocols (id, item_id, name, description, reconstitution, dosage, administration, storage, source_refs)
            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
           [id, b.itemId, b.name, b.description || '', b.reconstitution || '',
-           b.dosage || '', b.administration || '', b.storage || '', b.references || '']
+           b.dosage || '', b.administration || '', b.storage || '', b.sourceRefs || '']
         )
       );
       return res.status(201).json({ id, itemId: b.itemId, name: b.name });

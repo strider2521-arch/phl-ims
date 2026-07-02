@@ -27,12 +27,12 @@ export default async function handler(req, res) {
             dosage = COALESCE($4, dosage),
             administration = COALESCE($5, administration),
             storage = COALESCE($6, storage),
-            references = COALESCE($7, references),
+            source_refs = COALESCE($7, source_refs),
             updated_at = NOW()
            WHERE id = $8`,
           [b.name ?? null, b.description ?? null, b.reconstitution ?? null,
            b.dosage ?? null, b.administration ?? null, b.storage ?? null,
-           b.references ?? null, id]
+           b.sourceRefs ?? null, id]
         )
       );
       return res.json({ ok: true });

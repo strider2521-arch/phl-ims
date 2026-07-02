@@ -14,7 +14,7 @@ export default function Protocols() {
 
   const [form, setForm] = useState({
     itemId: "", name: "", description: "", reconstitution: "",
-    dosage: "", administration: "", storage: "", references: ""
+    dosage: "", administration: "", storage: "", sourceRefs: ""
   });
 
   const loadProtocols = async () => {
@@ -43,7 +43,7 @@ export default function Protocols() {
   };
 
   const openNew = () => {
-    setForm({ itemId: "", name: "", description: "", reconstitution: "", dosage: "", administration: "", storage: "", references: "" });
+    setForm({ itemId: "", name: "", description: "", reconstitution: "", dosage: "", administration: "", storage: "", sourceRefs: "" });
     setEditProto(null);
     setShowForm(true);
   };
@@ -52,7 +52,7 @@ export default function Protocols() {
     setForm({
       itemId: p.item_id || "", name: p.name || "", description: p.description || "",
       reconstitution: p.reconstitution || "", dosage: p.dosage || "",
-      administration: p.administration || "", storage: p.storage || "", references: p.references || ""
+      administration: p.administration || "", storage: p.storage || "", sourceRefs: p.source_refs || ""
     });
     setEditProto(p);
     setShowForm(true);
@@ -164,8 +164,8 @@ export default function Protocols() {
                   {section("Dosage Suggestions", p.dosage)}
                   {section("Administration", p.administration)}
                   {section("Storage", p.storage)}
-                  {section("References", p.references)}
-                  {!p.reconstitution && !p.dosage && !p.administration && !p.storage && !p.references && (
+                  {section("References", p.source_refs)}
+                  {!p.reconstitution && !p.dosage && !p.administration && !p.storage && !p.source_refs && (
                     <div style={{ fontSize: 12, color: theme.textMuted, textAlign: "center", padding: 12 }}>No details added yet — click Edit to add content.</div>
                   )}
                 </div>
@@ -236,7 +236,7 @@ export default function Protocols() {
             </div>
 
             <Field label="References / Sources">
-              <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 50 }} rows={2} value={form.references} onChange={e => setForm(f => ({ ...f, references: e.target.value }))} placeholder="Links to studies, sources…" />
+              <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 50 }} rows={2} value={form.sourceRefs} onChange={e => setForm(f => ({ ...f, sourceRefs: e.target.value }))} placeholder="Links to studies, sources…" />
             </Field>
 
             <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", marginTop: 24 }}>
