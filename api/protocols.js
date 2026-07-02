@@ -1,5 +1,6 @@
-import { verifyToken } from '../../lib/auth.js';
-import { withClient } from '../../lib/db.js';
+import crypto from 'crypto';
+import { verifyToken } from '../lib/auth.js';
+import { withClient } from '../lib/db.js';
 
 function requireAuth(req) {
   const auth = req.headers.authorization || '';
@@ -12,12 +13,38 @@ function requireAuth(req) {
 export default async function handler(req, res) {
   try {
     requireAuth(req);
-    const { id } = req.query;
     const b = req.body || {};
+    const id = req.query?.id;
 
-    if (!id) return res.status(400).json({ error: 'Protocol ID required' });
+    if (req.method === 'GET') {
+      const result = await withClient(async (client) => {
+        const { rows } = await client.query(`
+          SELECT p.*, i.sku as item_sku, i.name as item_name
+          FROM protocols p
+          LEFT JOIN items i ON i.id = p.item_id
+          ORDER BY p.name
+        `);
+        return rows;
+      });
+      return res.json(result);
+    }
+
+    if (req.method === 'POST') {
+      if (!b.itemId || !b.name) return res.status(400).json({ error: 'itemId and name required' });
+      const newId = crypto.randomUUID();
+      await withClient((client) =>
+        client.query(
+          `INSERT INTO protocols (id, item_id, name, description, reconstitution, dosage, administration, storage, source_refs)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+          [newId, b.itemId, b.name, b.description || '', b.reconstitution || '',
+           b.dosage || '', b.administration || '', b.storage || '', b.sourceRefs || '']
+        )
+      );
+      return res.status(201).json({ id: newId, itemId: b.itemId, name: b.name });
+    }
 
     if (req.method === 'PUT') {
+      if (!id) return res.status(400).json({ error: 'Protocol ID required (query param ?id=)' });
       await withClient((client) =>
         client.query(
           `UPDATE protocols SET
@@ -39,6 +66,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'DELETE') {
+      if (!id) return res.status(400).json({ error: 'Protocol ID required (query param ?id=)' });
       await withClient((client) => client.query('DELETE FROM protocols WHERE id = $1', [id]));
       return res.json({ ok: true });
     }

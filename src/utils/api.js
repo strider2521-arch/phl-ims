@@ -159,12 +159,12 @@ export async function createProtocol(data) {
 }
 
 export async function updateProtocol(id, data) {
-  return request(`/protocols/${id}`, {
+  return request(`/protocols?id=${id}`, {
     method: 'PUT',
     body: JSON.stringify(data)
   });
 }
 
 export async function deleteProtocol(id) {
-  return request(`/protocols/${id}`, { method: 'DELETE' });
+  return request(`/protocols?id=${id}`, { method: 'DELETE' });
 }
