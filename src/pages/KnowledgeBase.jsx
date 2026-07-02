@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 
 const STORAGE_KEY = "pims_knowledge";
@@ -23,37 +23,36 @@ const SEED_DOCS = [
     id: "seed-cjc-ipa",
     title: "CJC-1295 (No DAC) + Ipamorelin Protocol",
     category: "Protocol",
-    content: `CJC-1295 (No DAC) + Ipamorelin — Growth Hormone Stack
-
-═══════════════════════════════════════════
+    content: `═══════════════════════════════════════════
   OVERVIEW
 ═══════════════════════════════════════════
 
 CJC-1295 (no DAC) is a GHRH analog that amplifies GH release pulses. Ipamorelin is a selective GH secretagogue that triggers a clean GH pulse without spiking cortisol or prolactin. Together they amplify the body's natural pulsatile GH release.
 
-- Half-life: ~30 min (both peptides)
-- GH pulse amplification: 2-4x
-- Minimum protocol: 90 days
-- Administration: Subcutaneous (abdomen)
+Half-life: ~30 min (both peptides)  |  GH pulse amplification: 2-4×  |  Minimum protocol: 90 days  |  Administration: Subcutaneous (abdomen)
 
 ═══════════════════════════════════════════
   DOSING PROTOCOL
 ═══════════════════════════════════════════
 
-┌─────────────────┬─────────────┬──────────────┐
-│                 │ Month 1     │ Month 2+     │
-├─────────────────┼─────────────┼──────────────┤
-│ Dose per peptide│ 100 mcg     │ 200 mcg      │
-│ Syringe draw    │ 10 units    │ 20 units     │
-│ Frequency       │ 5 nights/wk │ 5 nights/wk  │
-│ Timing          │ ~30min pre-bed              │
-│ Site            │ SubQ (abdomen)              │
-└─────────────────┴─────────────┴──────────────┘
+┌─────────────────────┬─────────────────┬──────────────────┐
+│                     │ Month 1         │ Month 2+         │
+├─────────────────────┼─────────────────┼──────────────────┤
+│ Dose per peptide    │ 100 mcg         │ 200 mcg          │
+├─────────────────────┼─────────────────┼──────────────────┤
+│ Syringe draw        │ 10 units (0.1mL)│ 20 units (0.2mL) │
+├─────────────────────┼─────────────────┼──────────────────┤
+│ Frequency           │ 5 nights / week │ 5 nights / week  │
+├─────────────────────┼─────────────────┼──────────────────┤
+│ Timing              │ ~30 min before bed                │
+├─────────────────────┼─────────────────┼──────────────────┤
+│ Injection site      │ Subcutaneous (abdomen)            │
+└─────────────────────┴─────────────────┴──────────────────┘
 
 Both peptides mixed in same syringe. One injection nightly.
 
 ═══════════════════════════════════════════
-  RECONSTITUTION (if lyophilized)
+  RECONSTITUTION
 ═══════════════════════════════════════════
 
 - Use bacteriostatic water (BAC water)
@@ -63,61 +62,59 @@ Both peptides mixed in same syringe. One injection nightly.
 - Store reconstituted in fridge (2-8°C)
 - Use within 30 days once reconstituted
 
-Typical concentration: 2 mg/mL (1 mL BAC per 2 mg vial per peptide)
+Concentration: 2 mg/mL (1 mL BAC per 2 mg vial per peptide)
 
 ═══════════════════════════════════════════
   TIMELINE — WHAT TO EXPECT
 ═══════════════════════════════════════════
 
-Week 1: Improved sleep quality (most commonly reported early effect)
-Week 4: Increased energy, better workout recovery
-Week 8: Skin elasticity improvements, early body composition shifts
-Week 12: Measurable body composition change (reduced visceral fat, improved lean mass)
-Month 6: Full protocol benefits
+Week 1 — Improved sleep quality (most commonly reported early effect)
+Week 4 — Increased energy, better workout recovery
+Week 8 — Skin elasticity improvements, early body composition shifts
+Week 12 — Measurable body composition change (reduced visceral fat, improved lean mass)
+Month 6 — Full protocol benefits
 
 ═══════════════════════════════════════════
   SIDE EFFECTS & MANAGEMENT
 ═══════════════════════════════════════════
 
 Water retention / facial puffiness — Common (15-25%), weeks 1-4
-  → Self-resolving. Reduce sodium. Notify provider if >4 weeks
+→ Self-resolving. Reduce sodium. Notify provider if persistent beyond week 4.
 
 Increased hunger (Ipamorelin ghrelin effect) — Common (20-35%), ongoing
-  → Expected mechanism effect. Meal-plan accordingly
+→ Expected mechanism effect. Meal-plan accordingly. Not a sign to discontinue.
 
-Flushing / warmth post-injection — Uncommon (5-10%), 30-60 min post-injection
-  → Brief, self-resolving. Inject into abdomen (not thigh)
+Flushing / warmth post-injection — Uncommon (5-10%), 30-60 min post
+→ Brief, self-resolving. Inject into abdomen (not thigh) to reduce flush.
 
 Tingling in hands/wrists — Uncommon (5-10%), weeks 2-6
-  → Carpal tunnel-like from GH elevation. Reduce dose if persistent
+→ Carpal tunnel-like effect from GH elevation. Reduce dose if persistent.
 
-Fatigue / lethargy — Uncommon (<10%), first 1-2 weeks
-  → Adaptation phase, typically resolves
+Fatigue / initial lethargy — Uncommon (<10%), first 1-2 weeks
+→ Adaptation phase. Typically resolves within 2 weeks.
 
 ═══════════════════════════════════════════
-  OPTIMIZATION TIPS
+  OPTIMIZATION
 ═══════════════════════════════════════════
 
-• Inject ~30 min before bed (aligns with natural GH release during deep sleep)
-• Fast for 2+ hours before injection (insulin blunts GH release)
-• No alcohol on injection nights (can reduce GH pulse by 50-75%)
-• 5-on / 2-off schedule preserves receptor sensitivity
+• Inject ~30 min before bed — aligns with natural GH release during deep sleep
+• Fast 2+ hours before injection — insulin blunts GH release
+• No alcohol on injection nights — can reduce GH pulse by 50-75%
+• 5-on / 2-off schedule — preserves receptor sensitivity
 • Prioritize sleep hygiene — poor sleep undermines the primary mechanism
 
 ═══════════════════════════════════════════
   CYCLING
 ═══════════════════════════════════════════
 
-Common practice: 90 days on protocol, then evaluate with physician.
-Annual cycling (3 months on, 1 month off) is a common physician preference.
-No strong evidence for mandatory cycling with no-DAC formulation.
+Common practice: 90 days on protocol, then evaluate with physician. Annual cycling (3 months on, 1 month off) is a common physician preference. No strong evidence for mandatory cycling with no-DAC formulation.
 
 ═══════════════════════════════════════════
   STACKING
 ═══════════════════════════════════════════
 
 Pairs well with: BPC-157, TB-500, MOTS-c, NAD+ therapy
-Approach with caution: MK-677 (insulin resistance risk), GHRP-6 (more sides), exogenous HGH
+Use caution: MK-677 (insulin resistance risk), GHRP-6 (more sides), exogenous HGH
 
 ═══════════════════════════════════════════
   REFERENCES
@@ -130,6 +127,276 @@ Source: RxPepsDirect clinical protocol guide`,
     updated_at: 1720000000000
   }
 ];
+
+// ── Content renderer ─────────────────────────────────────────
+
+function isRuler(line) {
+  return /^[═▔▁─━]+$/.test(line.trim()) && line.trim().length > 5;
+}
+
+function isTableBorder(line) {
+  return /^[┌├└└┐┤┘┴┬┼─╌]+/.test(line.trim());
+}
+
+function isTableRow(line) {
+  return line.trimStart().startsWith("│");
+}
+
+function isBullet(line) {
+  return /^[•\-]\s/.test(line.trim());
+}
+
+function isNote(line) {
+  return line.trimStart().startsWith("→");
+}
+
+function isDivider(line) {
+  return /^─{3,}$/.test(line.trim()) || /^—{3,}$/.test(line.trim());
+}
+
+function hasPipes(line) {
+  return line.includes("|") && !line.trimStart().startsWith("→");
+}
+
+function parseContent(text) {
+  const lines = text.split("\n");
+  const blocks = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Empty line
+    if (!trimmed) { i++; continue; }
+
+    // Section header (ruler-enclosed)
+    if (isRuler(line)) {
+      const headerLine = lines[i + 1]?.trim();
+      const closingRuler = lines[i + 2] && isRuler(lines[i + 2]);
+      if (headerLine && closingRuler) {
+        blocks.push({ type: "section", text: headerLine.replace(/^#\s*/, "") });
+        i += 3;
+        continue;
+      }
+    }
+
+    // Table block
+    if (isTableBorder(line)) {
+      const tableRows = [];
+      while (i < lines.length && (isTableBorder(lines[i]) || isTableRow(lines[i]))) {
+        if (isTableRow(lines[i])) {
+          const cells = lines[i]
+            .split("│")
+            .slice(1, -1)
+            .map(c => c.trim());
+          if (cells.length > 0) tableRows.push({ cells });
+        }
+        i++;
+      }
+      if (tableRows.length > 0) {
+        const header = tableRows[0]?.cells?.length > 1 ? tableRows[0] : null;
+        const body = header ? tableRows.slice(1) : tableRows;
+        blocks.push({ type: "table", header, body });
+        continue;
+      }
+    }
+
+    // Bullet list
+    if (isBullet(trimmed)) {
+      const items = [];
+      while (i < lines.length && isBullet(lines[i].trim())) {
+        items.push(lines[i].trim().replace(/^[•\-]\s*/, ""));
+        i++;
+      }
+      blocks.push({ type: "bullets", items });
+      continue;
+    }
+
+    // Note lines (→)
+    if (isNote(trimmed)) {
+      const notes = [];
+      while (i < lines.length && isNote(lines[i].trim())) {
+        notes.push(lines[i].trim().replace(/^→\s*/, ""));
+        i++;
+      }
+      blocks.push({ type: "notes", items: notes });
+      continue;
+    }
+
+    // Separator
+    if (isDivider(trimmed)) { i++; continue; }
+
+    // Pipe-separated inline stats
+    if (hasPipes(trimmed)) {
+      const parts = trimmed.split("|").map(s => s.trim()).filter(Boolean);
+      blocks.push({ type: "stats", items: parts });
+      i++;
+      continue;
+    }
+
+    // Regular paragraph — collect consecutive non-empty, non-special lines
+    const paraLines = [];
+    while (i < lines.length) {
+      const l = lines[i].trim();
+      if (!l || isBullet(l) || isNote(l) || isTableBorder(l) || isTableRow(l) || isRuler(l) || isDivider(l) || hasPipes(l)) break;
+      if (l.startsWith("┌") || l.startsWith("├") || l.startsWith("└")) break;
+      paraLines.push(l);
+      i++;
+    }
+    if (paraLines.length > 0) {
+      blocks.push({ type: "paragraph", text: paraLines.join(" ") });
+    }
+  }
+  return blocks;
+}
+
+function StatChips({ items, theme }) {
+  const colors = [theme.accent, theme.success, theme.warning, theme.danger];
+  return (
+    <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+      {items.map((item, idx) => {
+        const [label, ...rest] = item.split(":");
+        const value = rest.join(":").trim();
+        return (
+          <div key={idx} style={{
+            flex: "1 1 160px", background: theme.bgTertiary, border: `1px solid ${theme.border}`,
+            borderRadius: 8, padding: "12px 14px"
+          }}>
+            <div style={{ fontSize: 9, color: colors[idx % colors.length], letterSpacing: 1, marginBottom: 4, textTransform: "uppercase" }}>
+              {label.trim()}
+            </div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>
+              {value}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function RichContent({ text, theme }) {
+  const blocks = parseContent(text);
+
+  return (
+    <div>
+      {blocks.map((block, idx) => {
+        switch (block.type) {
+          case "section":
+            return (
+              <div key={idx} style={{
+                marginBottom: 16, marginTop: idx > 0 ? 24 : 0,
+                borderBottom: `1px solid ${theme.border}`,
+                paddingBottom: 8
+              }}>
+                <div style={{
+                  fontSize: 13, fontWeight: 700, color: theme.accent,
+                  letterSpacing: 1.5, textTransform: "uppercase"
+                }}>
+                  {block.text}
+                </div>
+              </div>
+            );
+
+          case "paragraph":
+            return (
+              <p key={idx} style={{
+                fontSize: 13, color: theme.text, lineHeight: 1.7,
+                margin: "0 0 12px 0"
+              }}>
+                {block.text}
+              </p>
+            );
+
+          case "table": {
+            const g = (k) => `1px solid ${theme.border}`;
+            return (
+              <div key={idx} style={{
+                marginBottom: 16, borderRadius: 8, overflow: "hidden",
+                border: g('border')
+              }}>
+                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                  {block.header && (
+                    <thead>
+                      <tr style={{ background: theme.accentGlass }}>
+                        {block.header.cells.map((cell, ci) => (
+                          <th key={ci} style={{
+                            padding: "10px 14px", textAlign: "left",
+                            fontSize: 10, color: theme.accent, letterSpacing: 1,
+                            fontWeight: 600, borderBottom: g('border')
+                          }}>{cell}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                  )}
+                  <tbody>
+                    {block.body.map((row, ri) => (
+                      <tr key={ri} style={{
+                        background: ri % 2 === 0 ? "transparent" : theme.bgTertiary
+                      }}>
+                        {row.cells.map((cell, ci) => (
+                          <td key={ci} style={{
+                            padding: "10px 14px", fontSize: 12,
+                            color: ci === 0 ? theme.textSecondary : theme.text,
+                            fontWeight: ci === 0 ? 600 : 400,
+                            fontFamily: ci > 0 ? "'JetBrains Mono', monospace" : "inherit",
+                            borderBottom: ri < block.body.length - 1 ? g('border') : "none"
+                          }}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+
+          case "bullets":
+            return (
+              <div key={idx} style={{ marginBottom: 12 }}>
+                {block.items.map((item, bi) => (
+                  <div key={bi} style={{
+                    display: "flex", gap: 8, marginBottom: 6,
+                    fontSize: 13, color: theme.text, lineHeight: 1.6
+                  }}>
+                    <span style={{ color: theme.accent, flexShrink: 0 }}>•</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            );
+
+          case "notes":
+            return (
+              <div key={idx} style={{
+                marginBottom: 12, marginLeft: 8,
+                borderLeft: `2px solid ${theme.accent}30`,
+                paddingLeft: 12
+              }}>
+                {block.items.map((item, ni) => (
+                  <div key={ni} style={{
+                    fontSize: 12, color: theme.textSecondary,
+                    lineHeight: 1.6, marginBottom: 4
+                  }}>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            );
+
+          case "stats":
+            return <StatChips key={idx} items={block.items} theme={theme} />;
+
+          default:
+            return null;
+        }
+      })}
+    </div>
+  );
+}
+
+// ── Main component ──────────────────────────────────────────
 
 export default function KnowledgeBase() {
   const { theme } = useTheme();
@@ -251,31 +518,39 @@ export default function KnowledgeBase() {
               background: theme.glass, border: `1px solid ${theme.glassBorder}`,
               backdropFilter: "blur(12px)", borderRadius: 10, overflow: "hidden"
             }}>
-              <div style={{ padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}
+              {/* Header row */}
+              <div style={{
+                padding: "14px 20px", display: "flex", justifyContent: "space-between",
+                alignItems: "center", cursor: "pointer"
+              }}
                 onClick={() => setExpanded(isExpanded ? null : doc.id)}>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>{doc.title}</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>{doc.title}</span>
                     <span style={{
-                      fontSize: 10, padding: "2px 8px", borderRadius: 4, background: theme.accentGlass,
-                      color: theme.accent, letterSpacing: 0.5
+                      fontSize: 10, padding: "2px 8px", borderRadius: 4,
+                      background: theme.accentGlass, color: theme.accent, letterSpacing: 0.5
                     }}>{doc.category}</span>
                   </div>
                   <div style={{ fontSize: 11, color: theme.textMuted }}>
                     {new Date(doc.updated_at).toLocaleDateString()}
                   </div>
                 </div>
-                <div style={{ fontSize: 12, color: theme.textMuted }}>
+                <div style={{ fontSize: 12, color: theme.textMuted, marginLeft: 12 }}>
                   {isExpanded ? "▲" : "▼"}
                 </div>
               </div>
 
+              {/* Expanded content */}
               {isExpanded && (
-                <div style={{ padding: "0 20px 14px", borderTop: g('border') }}>
-                  <div style={{ padding: "12px 0", fontSize: 13, color: theme.text, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
-                    {doc.content}
+                <div style={{ borderTop: g('border') }}>
+                  <div style={{ padding: "20px" }}>
+                    <RichContent text={doc.content} theme={theme} />
                   </div>
-                  <div style={{ display: "flex", gap: 6, justifyContent: "flex-end" }}>
+                  <div style={{
+                    padding: "10px 20px", borderTop: g('border'),
+                    display: "flex", gap: 6, justifyContent: "flex-end"
+                  }}>
                     <button onClick={() => openEdit(doc)} style={{ ...btnSecondary, padding: "5px 12px", fontSize: 11 }}>Edit</button>
                     <button onClick={() => del(doc.id)} style={{ ...btnSecondary, padding: "5px 12px", fontSize: 11, color: theme.danger, borderColor: theme.dangerBorder }}>Delete</button>
                   </div>
@@ -306,9 +581,13 @@ export default function KnowledgeBase() {
             </Field>
 
             <Field label="Content">
-              <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 200 }} rows={8} value={form.content}
+              <div style={{ fontSize: 11, color: theme.textSecondary, marginBottom: 8, lineHeight: 1.5 }}>
+                Use ═══ headers ═══ for section titles, ┌──┐ tables for data, • for lists, → for notes, and | for stats chips.
+              </div>
+              <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 250, fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}
+                rows={10} value={form.content}
                 onChange={e => setForm(f => ({ ...f, content: e.target.value }))}
-                placeholder="Write your document content here.&#10;&#10;Dosages, reconstitution steps, safety info, references…" />
+                placeholder={'══════════════════\n  SECTION TITLE\n══════════════════\n\nContent here...\n\n┌──────────┬──────────┐\n│ Header   │ Value    │\n├──────────┼──────────┤\n│ Row 1    │ Data     │\n└──────────┴──────────┘\n\n• Bullet point\n→ Note or mitigation'} />
             </Field>
 
             <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", marginTop: 24 }}>
