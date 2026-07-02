@@ -18,6 +18,119 @@ function uid() {
 
 const CATEGORIES = ["Dosage", "Protocol", "General", "Storage", "Safety"];
 
+const SEED_DOCS = [
+  {
+    id: "seed-cjc-ipa",
+    title: "CJC-1295 (No DAC) + Ipamorelin Protocol",
+    category: "Protocol",
+    content: `CJC-1295 (No DAC) + Ipamorelin — Growth Hormone Stack
+
+═══════════════════════════════════════════
+  OVERVIEW
+═══════════════════════════════════════════
+
+CJC-1295 (no DAC) is a GHRH analog that amplifies GH release pulses. Ipamorelin is a selective GH secretagogue that triggers a clean GH pulse without spiking cortisol or prolactin. Together they amplify the body's natural pulsatile GH release.
+
+- Half-life: ~30 min (both peptides)
+- GH pulse amplification: 2-4x
+- Minimum protocol: 90 days
+- Administration: Subcutaneous (abdomen)
+
+═══════════════════════════════════════════
+  DOSING PROTOCOL
+═══════════════════════════════════════════
+
+┌─────────────────┬─────────────┬──────────────┐
+│                 │ Month 1     │ Month 2+     │
+├─────────────────┼─────────────┼──────────────┤
+│ Dose per peptide│ 100 mcg     │ 200 mcg      │
+│ Syringe draw    │ 10 units    │ 20 units     │
+│ Frequency       │ 5 nights/wk │ 5 nights/wk  │
+│ Timing          │ ~30min pre-bed              │
+│ Site            │ SubQ (abdomen)              │
+└─────────────────┴─────────────┴──────────────┘
+
+Both peptides mixed in same syringe. One injection nightly.
+
+═══════════════════════════════════════════
+  RECONSTITUTION (if lyophilized)
+═══════════════════════════════════════════
+
+- Use bacteriostatic water (BAC water)
+- Inject BAC water slowly down vial wall, not directly onto powder
+- Swirl gently — do not shake
+- Let sit 5-10 min until fully dissolved
+- Store reconstituted in fridge (2-8°C)
+- Use within 30 days once reconstituted
+
+Typical concentration: 2 mg/mL (1 mL BAC per 2 mg vial per peptide)
+
+═══════════════════════════════════════════
+  TIMELINE — WHAT TO EXPECT
+═══════════════════════════════════════════
+
+Week 1: Improved sleep quality (most commonly reported early effect)
+Week 4: Increased energy, better workout recovery
+Week 8: Skin elasticity improvements, early body composition shifts
+Week 12: Measurable body composition change (reduced visceral fat, improved lean mass)
+Month 6: Full protocol benefits
+
+═══════════════════════════════════════════
+  SIDE EFFECTS & MANAGEMENT
+═══════════════════════════════════════════
+
+Water retention / facial puffiness — Common (15-25%), weeks 1-4
+  → Self-resolving. Reduce sodium. Notify provider if >4 weeks
+
+Increased hunger (Ipamorelin ghrelin effect) — Common (20-35%), ongoing
+  → Expected mechanism effect. Meal-plan accordingly
+
+Flushing / warmth post-injection — Uncommon (5-10%), 30-60 min post-injection
+  → Brief, self-resolving. Inject into abdomen (not thigh)
+
+Tingling in hands/wrists — Uncommon (5-10%), weeks 2-6
+  → Carpal tunnel-like from GH elevation. Reduce dose if persistent
+
+Fatigue / lethargy — Uncommon (<10%), first 1-2 weeks
+  → Adaptation phase, typically resolves
+
+═══════════════════════════════════════════
+  OPTIMIZATION TIPS
+═══════════════════════════════════════════
+
+• Inject ~30 min before bed (aligns with natural GH release during deep sleep)
+• Fast for 2+ hours before injection (insulin blunts GH release)
+• No alcohol on injection nights (can reduce GH pulse by 50-75%)
+• 5-on / 2-off schedule preserves receptor sensitivity
+• Prioritize sleep hygiene — poor sleep undermines the primary mechanism
+
+═══════════════════════════════════════════
+  CYCLING
+═══════════════════════════════════════════
+
+Common practice: 90 days on protocol, then evaluate with physician.
+Annual cycling (3 months on, 1 month off) is a common physician preference.
+No strong evidence for mandatory cycling with no-DAC formulation.
+
+═══════════════════════════════════════════
+  STACKING
+═══════════════════════════════════════════
+
+Pairs well with: BPC-157, TB-500, MOTS-c, NAD+ therapy
+Approach with caution: MK-677 (insulin resistance risk), GHRP-6 (more sides), exogenous HGH
+
+═══════════════════════════════════════════
+  REFERENCES
+═══════════════════════════════════════════
+
+Raun K, et al. Eur J Endocrinol. 1998 — Ipamorelin characterization
+Teichman SL, et al. J Clin Endocrinol Metab. 2006 — CJC-1295 study
+Source: RxPepsDirect clinical protocol guide`,
+    created_at: 1720000000000,
+    updated_at: 1720000000000
+  }
+];
+
 export default function KnowledgeBase() {
   const { theme } = useTheme();
   const [docs, setDocs] = useState([]);
@@ -29,7 +142,14 @@ export default function KnowledgeBase() {
 
   const [form, setForm] = useState({ title: "", category: "General", content: "" });
 
-  useEffect(() => { setDocs(loadDocs()); }, []);
+  useEffect(() => {
+    let existing = loadDocs();
+    if (existing.length === 0) {
+      existing = SEED_DOCS;
+      saveDocs(existing);
+    }
+    setDocs(existing);
+  }, []);
 
   const g = (k) => `1px solid ${theme.border}`;
   const inputStyle = {
