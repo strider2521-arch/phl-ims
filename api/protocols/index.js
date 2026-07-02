@@ -1,6 +1,6 @@
 import crypto from 'crypto';
-import { verifyToken } from '../lib/auth.js';
-import { withClient } from '../lib/db.js';
+import { verifyToken } from '../../lib/auth.js';
+import { withClient } from '../../lib/db.js';
 
 function requireAuth(req) {
   const auth = req.headers.authorization || '';
