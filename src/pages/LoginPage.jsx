@@ -92,10 +92,6 @@ export default function LoginPage() {
             </button>
           </form>
         </div>
-
-        <div style={{ textAlign: "center", marginTop: 16, fontSize: 11, color: theme.textMuted }}>
-          Default: admin / admin123
-        </div>
       </div>
     </div>
   );
