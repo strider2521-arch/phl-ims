@@ -8,7 +8,7 @@ import Inventory from "./pages/Inventory";
 import Invoices from "./pages/Invoices";
 import CreateInvoice from "./pages/CreateInvoice";
 import Settings from "./pages/Settings";
-import Protocols from "./pages/Protocols";
+import KnowledgeBase from "./pages/KnowledgeBase";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { login as apiLogin, logout as apiLogout, loadData, getStoredUser } from "./utils/api";
@@ -67,7 +67,7 @@ function AppContent() {
       <DataContext.Provider value={{ data, refreshData }}>
         <Layout page={page} setPage={setPage}>
           {page === "dashboard" && <Dashboard setPage={setPage} />}
-          {page === "protocols" && <Protocols />}
+          {page === "knowledge" && <KnowledgeBase />}
           {page === "inventory" && <Inventory />}
           {page === "invoices" && <Invoices setPage={setPage} setEditingInvoice={setEditingInvoice} />}
           {page === "create-invoice" && <CreateInvoice setPage={setPage} editingInvoice={editingInvoice} setEditingInvoice={setEditingInvoice} />}
