@@ -207,58 +207,401 @@ Caution with: Other GLP-1 agonists (semaglutide, tirzepatide) — redundant mech
 No research peptide stacking data available.` }
 ];
 
-const SEED_SEMAGLUTIDE_SECTIONS = [
-  { heading: "Overview", body: `Semaglutide is a GLP-1 receptor agonist developed by Novo Nordisk. FDA-approved for type 2 diabetes (Ozempic, Rybelsus) and obesity (Wegovy). It mimics GLP-1 hormone to increase insulin secretion, slow gastric emptying, and reduce appetite.
+const SEED_GHKCU_SECTIONS = [
+  { heading: "Overview", body: `GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine, first isolated in 1973 by Dr. Loren Pickart. It is naturally present in human plasma and declines ~50% after age 60. It stimulates collagen production, modulates MMPs for tissue remodelling, and has anti-inflammatory effects via TNF-alpha and IL-1 beta suppression.
 
-Mechanism: GLP-1 receptor agonist  |  Half-life: ~7 days (once-weekly dosing)  |  Route: Subcutaneous or Oral  |  FDA status: Approved` },
-  { heading: "Dosing Protocol", body: `┌──────────────────────────┬──────────────────────┬──────────────────────┐
-│                          │ Weight Loss (Wegovy)  │ T2D (Ozempic)        │
-├──────────────────────────┼──────────────────────┼──────────────────────┤
-│ Starting dose            │ 0.25 mg once weekly  │ 0.25 mg once weekly  │
-├──────────────────────────┼──────────────────────┼──────────────────────┤
-│ Titration                │ Increase every 4 wks │ Increase every 4 wks │
-├──────────────────────────┼──────────────────────┼──────────────────────┤
-│ Maintenance dose         │ 1.7 - 2.4 mg weekly  │ 0.5 - 1.0 mg weekly  │
-├──────────────────────────┼──────────────────────┼──────────────────────┤
-│ Max dose                 │ 2.4 mg once weekly   │ 1.0 mg once weekly   │
-├──────────────────────────┼──────────────────────┼──────────────────────┤
-│ Administration           │ Subcutaneous          │ Subcutaneous         │
-└──────────────────────────┴──────────────────────┴──────────────────────┘
+Route: Topical or Subcutaneous injection  |  Half-life: ~30 min (injectable)  |  Mechanism: Fibroblast activation, collagen synthesis, angiogenesis  |  Category: Copper peptide, tissue repair` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Topical              │ Injectable (SubQ)    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Standard dose         │ 0.1-0.5% cream       │ 1-2 mg per day       │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency             │ 2× daily             │ 1× daily or 5-on/2-off│
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Duration              │ 12 weeks             │ 4-12 weeks           │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Timing                │ Morning + evening    │ Evening, 1-2h pre-bed│
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Notes                 │ Apply to clean skin  │ SubQ into abdomen    │
+└───────────────────────┴──────────────────────┴──────────────────────┘
 
-Titration (Wegovy): 0.25mg → 0.5mg → 1.0mg → 1.7mg → 2.4mg, 4 weeks per step.` },
-  { heading: "Reconstitution", body: `Semaglutide is supplied as a pre-filled pen or tablet — no reconstitution required.
-- Store in fridge (2-8°C) before first use
-- After first use: up to 56 days (Ozempic) / 28 days (Wegovy) at room temp or fridge
-- Do not freeze` },
-  { heading: "Timeline", body: `Weeks 1-4 — Appetite suppression begins at 0.25mg. Mild side effects as body adjusts.
-Weeks 4-8 — Dose increases. More noticeable appetite reduction. Early weight loss begins.
-Week 12+ — Significant weight loss visible at therapeutic doses (1.0mg+).
-Month 6 — Average 10-15% weight loss (Wegovy) / 0.5-1.0% HbA1c reduction (Ozempic).
-Month 12+ — Sustained results with continued use. Weight may plateau.` },
-  { heading: "Side Effects", body: `Nausea — Very common (30-50%), especially during titration
-→ Dose-dependent. Eat smaller, bland meals. Improves over weeks.
+Start topical at 0.1% for first 2 weeks to reduce "copper uglies" transition phase.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Store reconstituted in fridge (2-8°C)
+- Use within 30 days once reconstituted
 
-Diarrhoea — Common (15-25%) — Usually transient during titration.
-Vomiting — Common (10-15%) — Slow titration reduces risk.
-Constipation — Common (10-15%) — Increase water, fibre, activity.
-Abdominal pain — Common (5-10%) — Typically mild.
+Concentration: 5-10 mg/mL (5 mL BAC per 50 mg vial for 10 mg/mL)` },
+  { heading: "Timeline", body: `Weeks 1-2 — "Copper uglies" phase: congestion, small bumps, dullness from accelerated turnover. Do not stop — reduce to every other day if pronounced.
+Weeks 4-6 — Improved hydration, skin softness, better texture.
+Weeks 8-10 — Fine lines improve, redness reduces. Hair follicle response may appear.
+Week 12+ — Peak measurable outcomes: increased skin density, reduced wrinkle depth (~32.8%).
+After stopping — Effects gradually diminish over 3-6 months.` },
+  { heading: "Side Effects", body: `"Copper uglies" (topical) — Very common, weeks 1-2
+→ Accelerated cellular turnover. Reduce to every other day. Hydrate. Do not stop.
 
-⚠️ Boxed warning: Thyroid C-cell tumour risk (rare). Pancreatitis risk. Gallbladder disease.
-⚠️ Does NOT cause hypoglycemia alone — risk increases with insulin / sulfonylureas.` },
-  { heading: "Cycling", body: `FDA-approved continuous therapy — not cycled.
-Designed for long-term weekly use for chronic conditions (T2D, obesity).
-If stopping: appetite returns, weight regain is common. Taper under physician guidance.` },
-  { heading: "Stacking", body: `Standard (pharmaceutical): Metformin, SGLT2 inhibitors, insulin (T2D) — under physician supervision.
-Caution: Other GLP-1 agonists (tirzepatide, retatrutide) — redundant, increased side effects.
-Avoid: DPP-4 inhibitors (e.g. sitagliptin) — same mechanism, no added benefit.
-Research peptides: Limited data. Caution with GH peptides.` }
+Metallic/copper taste (injectable) — Uncommon (<10%), minutes post-injection
+→ Harmless. Self-resolving within 30 min. Reflects copper biodistribution.
+
+Injection site redness — Common (10-20%), weeks 1-3
+→ Rotate sites. Use 28-31G needle. Allow vial to warm to room temp.
+
+Mild nausea — Rare (<5%), first week
+→ Hydrate well. Reduce frequency if persistent.` },
+  { heading: "Cycling", body: `Topical: 12 weeks on, 4 weeks off for cosmetic protocols.
+Injectable: 4-8 weeks on, 2-4 weeks off typical for systemic use.
+The "copper uglies" transition phase is temporary — push through it.` },
+  { heading: "Stacking", body: `Pairs well with: BPC-157 — complementary tissue repair pathways
+Pairs well with: GH peptides (sermorelin, CJC) — GH increases collagen baseline
+Pairs well with: Hyaluronic acid serum — compounds hydration benefit
+Pairs well with: Topical retinoid (alternate days) — collagen via different mechanisms
+Use caution: High-dose vitamin C — can destabilise copper complex` }
+];
+
+const SEED_GLOW_SECTIONS = [
+  { heading: "Overview", body: `The "Glow" stack combines GHK-Cu, BPC-157, and TB-500 (Thymosin Beta-4) for comprehensive tissue repair, skin health, and recovery. GHK-Cu drives collagen synthesis, BPC-157 upregulates growth factors for healing, and TB-500 promotes cell migration and actin polymerisation.
+
+Together this stack targets skin, connective tissue, joints, and systemic recovery from multiple angles.
+
+Route: Subcutaneous injection  |  Category: Tissue repair stack (copper peptide + growth factor + cytoskeletal)` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│ Component             │ Dose                 │ Frequency            │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ GHK-Cu                │ 1-2 mg               │ Daily                │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ BPC-157               │ 250-500 mcg          │ Daily                │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ TB-500                │ 2.5-5 mg             │ 2× per week          │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Protocol length       │ 4-8 weeks            │ —                    │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+All three can be drawn into the same syringe. Inject SubQ into abdomen. Rotate sites.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water) for each peptide separately
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Store each reconstituted peptide in fridge (2-8°C)
+- Use within 30 days once reconstituted
+
+TB-500 may require slightly more BAC water due to its larger molecular weight (5 kDa).` },
+  { heading: "Timeline", body: `Weeks 1-2 — Early anti-inflammatory effects. Skin may show "copper uglies" from GHK-Cu.
+Weeks 3-4 — Improved skin texture and hydration. Reduced joint pain and better recovery.
+Weeks 4-6 — Noticeable tissue repair. Better wound healing. Skin firmness improves.
+Weeks 8+ — Peak effects: collagen density, reduced fine lines, improved tendon/ligament health.
+After stopping — Effects taper over 2-4 months.` },
+  { heading: "Side Effects", body: `Injection site reactions — Common (10-20%)
+→ Rotate sites. Use proper technique.
+
+Copper uglies (from GHK-Cu) — Common, first 2 weeks
+→ Temporary. Reduce GHK-Cu to every other day.
+
+Metallic taste (from GHK-Cu) — Uncommon (<10%)
+→ Harmless. Self-resolving within 30 min.
+
+Mild fatigue — Uncommon, first week
+→ Adaptation phase. Typically resolves.
+
+⚠️ BPC-157 contraindicated in active cancer. TB-500 may increase angiogenesis — caution with cancer history.` },
+  { heading: "Cycling", body: `Standard protocol: 4-8 weeks on, 2-4 weeks off.
+For chronic conditions: up to 12 weeks may be warranted.
+Allow equal rest period between cycles.` },
+  { heading: "Stacking", body: `The Glow stack IS the combination — all three peptides work synergistically.
+Can add: Collagen peptides (oral) — provides raw materials for collagen synthesis
+Can add: NAD+ — cellular energy to support the repair processes
+Avoid adding: Other angiogenesis-promoting peptides without medical supervision` }
+];
+
+const SEED_MT2_SECTIONS = [
+  { heading: "Overview", body: `Melanotan II (MT-2) is a synthetic analogue of alpha-melanocyte-stimulating hormone (α-MSH). It stimulates melanogenesis (skin pigmentation/tanning) through the MC1 receptor. It also has secondary effects on libido via MC3/MC4 receptor activation, and some appetite-suppressant effects.
+
+Route: Subcutaneous injection  |  Half-life: ~36 hours  |  Mechanism: MC1 receptor agonist (melanogenesis)  |  Category: Tanning peptide, melanocortin agonist` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Loading Phase        │ Maintenance          │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Dose                  │ 250-500 mcg (0.25-0.5mg) │ 250-500 mcg 1-2×/wk │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency             │ Every other day      │ 1-2 times per week   │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Duration              │ 2-4 weeks            │ Ongoing as needed    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Syringe draw (2mg/mL) │ 12.5-25 units        │ 12.5-25 units        │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+Start low (250 mcg) to assess nausea response. Titrate up slowly. Always use sunscreen — MT-2 increases melanin but does NOT replace sun protection.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- 2 mL BAC per 10 mg vial = 5 mg/mL concentration
+- 250 mcg dose = 0.05 mL = 5 units on U-100 syringe
+- 500 mcg dose = 0.1 mL = 10 units
+- Store in fridge (2-8°C)
+- Use within 30 days once reconstituted
+- Protect from light (photosensitive)` },
+  { heading: "Timeline", body: `Days 1-3 — Possible nausea and facial flushing shortly after injection.
+Week 1 — Skin darkening may begin. Nausea typically subsides.
+Week 2-3 — Visible tan developing. Existing freckles/moles may darken.
+Week 4 — Full tan effect at end of loading phase.
+Maintenance — 1-2 doses per week to maintain colour.
+After stopping — Tan fades over 4-8 weeks as melanin naturally clears.` },
+  { heading: "Side Effects", body: `Nausea — Very common (40-60%), especially first doses
+→ Dose-dependent. Inject before bed to sleep through it. Resolves within 1-2 weeks.
+
+Facial flushing — Common (30-50%), 15-60 min post-injection
+→ Benign. Self-resolving.
+
+Increased libido — Common (20-40%)
+→ MC3/MC4 receptor effect. Can be significant.
+
+Spontaneous erections (males) — Common (15-30%)
+→ Temporary. Typically subsides after loading phase.
+
+Darkening of existing moles/freckles — Common
+→ Monitor moles for any changes. Sunscreen essential.
+
+Nausea/vomiting (severe) — Uncommon (<5%)
+→ Reduce dose. If persistent, discontinue.` },
+  { heading: "Cycling", body: `Loading phase: 2-4 weeks of every-other-day dosing.
+Maintenance: 1-2 doses per week, or as needed to maintain desired colour.
+Cycle off: Allow 4-8 weeks break periodically.
+Melanin production is cumulative — less frequent dosing maintains tan once established.` },
+  { heading: "Stacking", body: `Avoid stacking with: Other melanocortin agonists — redundant.
+Can use with: BPC-157 for tissue repair (no known interaction).
+Can use with: GHK-Cu for skin health (complementary).
+⚠️ Do NOT use with: Tanning beds or excessive UV exposure — increased skin cancer risk.
+⚠️ Monitor moles — MT-2 can darken existing naevi, making changes harder to detect.` }
+];
+
+const SEED_NAD_SECTIONS = [
+  { heading: "Overview", body: `NAD+ (Nicotinamide Adenine Dinucleotide) is a crucial coenzyme found in every cell. It is essential for cellular energy (ATP production via mitochondrial respiration), DNA repair (PARP activation), and sirtuin-mediated longevity pathways. NAD+ levels naturally decline with age — dropping ~50% by age 60.
+
+Route: Subcutaneous injection, IV infusion, or Oral  |  Half-life: 2-4 hours (injectable)  |  Category: Metabolic coenzyme, longevity, cellular health` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Injectable (SubQ/IM) │ Oral (NR/NMN)        │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Standard dose         │ 50-100 mg per day    │ 250-500 mg per day   │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Loading / IV          │ 250-500 mg IV 1-3×/wk│ —                    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency             │ Daily or 5-on/2-off  │ Daily                │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Protocol length       │ 4-12 weeks           │ Ongoing              │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Injection site        │ SubQ (abdomen)       │ N/A                  │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+Injectable NAD+ is acidic — inject slowly. May cause mild stinging at injection site.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Store reconstituted in fridge (2-8°C)
+- Use within 30 days once reconstituted
+- NAD+ is sensitive to light and heat — protect vial from light
+
+Concentration: 50 mg/mL (2 mL BAC per 100 mg vial)` },
+  { heading: "Timeline", body: `Days 1-3 — Some users report mild flushing or warmth post-injection. Energy increase may begin.
+Week 1-2 — Noticeable increase in mental clarity and physical energy. Better exercise recovery.
+Week 3-4 — Improved sleep quality. Reduced brain fog. Better stress resilience.
+Week 6-8 — Systemic anti-aging effects reported: better skin, cognition, energy levels.
+Ongoing — Cumulative benefits with consistent use. Effects subside within 2-4 weeks of stopping.` },
+  { heading: "Side Effects", body: `Injection site pain/stinging — Common (20-30%)
+→ NAD+ is acidic. Inject slowly. Dilute with more BAC water if needed.
+
+Flushing/warmth — Common (15-25%), 10-30 min post-injection
+→ Niacin-like effect. Benign. Self-resolving.
+
+Mild nausea — Uncommon (5-10%)
+→ Take with food. Reduce dose.
+
+Headache — Uncommon (5-10%)
+→ Stay hydrated. Usually transient.
+
+⚠️ Caution with: Pre-existing bipolar disorder or mania — NAD+ may exacerbate mood elevation.` },
+  { heading: "Cycling", body: `Injectable: 4-12 weeks on, 2-4 weeks off is common practice.
+Oral (NR/NMN): Can be taken continuously, but periodic breaks are recommended.
+IV loading: 3-6 sessions over 2-3 weeks, then monthly maintenance.
+NAD+ levels drop after stopping — effects are not permanent.` },
+  { heading: "Stacking", body: `Pairs well with: GHK-Cu — both target cellular health and repair via different pathways
+Pairs well with: BPC-157 — tissue repair + cellular energy support
+Pairs well with: CJC/Ipa — GH pulse + metabolic support
+Avoid with: High-dose niacin — may compound flushing side effects.
+Complementary oral: NMN, NR, or nicotinamide riboside for maintenance between injectable cycles.` }
+];
+
+const SEED_SELANK_SECTIONS = [
+  { heading: "Overview", body: `Selank is a synthetic heptapeptide (TP-7) developed by the Russian Institute of Molecular Genetics. It is a synthetic analogue of tuftsin, an immunomodulatory peptide. Selank modulates the GABAergic system gently (without sedation or dependency), elevates BDNF, and regulates serotonin metabolism — producing anxiolytic effects without cognitive impairment.
+
+Route: Intranasal (spray) or Subcutaneous injection  |  Half-life: 1-2 min (plasma), 4-6h (CNS effect)  |  Category: Anxiolytic, nootropic, neuropeptide` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Intranasal (standard) │ Subcutaneous         │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Beginner dose         │ 250 mcg 1× daily     │ 250 mcg 1× daily     │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Standard dose         │ 250-500 mcg 1-2×/day │ 250-500 mcg daily    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Higher dose           │ 500-750 mcg daily    │ 500-750 mcg daily    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Onset                 │ 20-40 min            │ 15-30 min            │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Duration              │ 4-6 hours            │ 4-6 hours            │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+Morning dosing is common. Can add afternoon dose if needed. Cycle: 2-4 weeks on, 1-2 weeks off.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- For nasal spray: mix with 0.9% saline solution for better absorption
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Store in fridge (2-8°C)
+- Use within 30 days once reconstituted
+
+Nasal spray: 10 mg/mL concentration (1 mL per 10 mg vial) — ~250 mcg per 0.025 mL spray` },
+  { heading: "Timeline", body: `Day 1 — Acute anxiolytic effect within 20-40 minutes of first dose. Calm without sedation.
+Week 1 — Background anxiety noticeably reduced. Mental clarity improves.
+Week 2 — Cumulative effects build. Better stress resilience. Improved focus.
+Week 3-4 — Full anxiolytic and cognitive benefits. Baseline anxiety shifts downward.
+After cycling off — Effects gradually taper over 1-2 weeks. No withdrawal reported.` },
+  { heading: "Side Effects", body: `Mild drowsiness — Uncommon (5-10%), especially at higher doses
+→ Usually resolves within first week. Reduce dose if persistent.
+
+Nasal irritation (intranasal) — Mild, formulation-dependent
+→ Related to carrier solution, not Selank itself.
+
+Mild headache — Rare (<5%)
+→ Stay hydrated. Usually transient.
+
+Initial fatigue (first few days) — Rare (<5%)
+→ Adaptation phase. Resolves quickly.
+
+No dependency, no withdrawal, no tolerance at standard cycle lengths.` },
+  { heading: "Cycling", body: `Standard cycle: 2-4 weeks on, 1-2 weeks off.
+Daily use within a cycle is well-tolerated.
+Some users run longer cycles without issues. Cycling is conservative best practice.
+No tolerance buildup observed at standard doses.` },
+  { heading: "Stacking", body: `Pairs exceptionally with: Semax — "Calm & Clarity" stack. Selank for anxiety, Semax for cognitive drive.
+Pairs well with: Magnesium Glycinate — supports GABA function, extends calming effect into evening.
+Pairs well with: BPC-157 — mental stress + physical recovery.
+⚠️ Avoid with: Benzodiazepines, alcohol, or other GABAergic depressants without medical supervision.` }
+];
+
+const SEED_SEMAX_SECTIONS = [
+  { heading: "Overview", body: `Semax is a synthetic heptapeptide and analogue of ACTH(4-10), developed by the Russian Institute of Molecular Genetics. It is a nootropic, neuroprotective, and neurorestorative agent used clinically in Russia for stroke recovery, cognitive impairment, and optic nerve disease. It elevates BDNF levels, activates dopaminergic and serotonergic systems, and inhibits enkephalin-degrading enzymes.
+
+Route: Intranasal (spray) or Subcutaneous injection  |  Half-life: ~5-15 min (plasma), 4-6h (CNS)  |  Category: Nootropic, neuroprotective, ACTH analogue` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Intranasal            │ Subcutaneous         │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Standard dose         │ 400-800 mcg (0.4-0.8mg)│ 200-500 mcg daily   │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency             │ 1-2× daily           │ 1× daily             │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Cycle length          │ 2-4 weeks            │ 2-4 weeks            │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Onset                 │ 15-30 min            │ 10-20 min            │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Duration              │ 4-6 hours            │ 4-6 hours            │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+Morning dosing preferred — Semax has an energising effect. Avoid evening doses.
+Nasal spray: ~400 mcg per spray (0.05 mL at 8 mg/mL).` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- For nasal spray: mix with 0.9% saline for better mucosal absorption
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Store in fridge (2-8°C)
+- Use within 30 days once reconstituted
+
+Nasal concentration: 8 mg/mL (1.25 mL per 10 mg vial)` },
+  { heading: "Timeline", body: `Day 1 — Increased alertness, focus, and mental energy within 30 min of first dose.
+Week 1 — Sustained cognitive enhancement. Better memory recall. Reduced mental fatigue.
+Week 2 — Improved stress resilience. Better learning retention. Neuroprotective effects accumulate.
+Week 3-4 — Peak cognitive benefits. Enhanced BDNF levels support neuroplasticity.
+After stopping — Benefits gradually taper. Neuroprotective effects may persist longer.` },
+  { heading: "Side Effects", body: `Mild overstimulation/jitteriness — Common (10-20%), especially at higher doses
+→ Reduce dose. Take earlier in the day. Avoid afternoon/evening.
+
+Mild headache — Uncommon (5-10%)
+→ Stay hydrated. Usually transient.
+
+Nasal irritation (intranasal) — Mild, formulation-dependent
+→ Related to carrier solution.
+
+Insomnia (if taken late) — Common
+→ Avoid dosing after 2 PM.
+
+No known toxicity or dependency at standard doses. Excellent safety profile in clinical use.` },
+  { heading: "Cycling", body: `Standard: 2-4 weeks on, 1-2 weeks off.
+Semax is energising — tolerance to the cognitive effects may develop with extended use.
+Cycling preserves sensitivity and effectiveness.
+Used clinically in Russia for up to 14 days per course.` },
+  { heading: "Stacking", body: `Pairs exceptionally with: Selank — "Calm & Clarity" stack. Semax for focus, Selank for anxiety.
+Pairs well with: Noopept — complementary nootropic pathways.
+Pairs well with: Choline sources (Alpha-GPC, Citicoline) — supports acetylcholine synthesis.
+⚠️ Avoid with: Strong stimulants — may compound overstimulation.
+⚠️ Avoid evening dosing — will disrupt sleep.` }
+];
+
+const SEED_TB500_SECTIONS = [
+  { heading: "Overview", body: `TB-500 (Thymosin Beta-4 fragment) is a synthetic version of a naturally occurring peptide that promotes tissue repair, cell migration, and actin polymerisation. It is fundamental for cytoskeletal organisation, angiogenesis, and wound healing. Combined with BPC-157 it forms the popular "Wolverine stack" for accelerated recovery.
+
+Route: Subcutaneous injection  |  Half-life: ~2-4 days (long-acting)  |  Mechanism: Actin binding, cell migration, angiogenesis  |  Category: Tissue repair, cytoskeletal peptide` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────┬──────────────────────┬──────────────────────┐
+│                       │ Loading Phase        │ Maintenance          │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Dose                  │ 2.5-5 mg per dose    │ 2.5 mg per dose      │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency             │ 2-3× per week        │ 1× per week          │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Duration              │ 2-4 weeks            │ Ongoing as needed    │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Syringe draw (10mg/mL)│ 25-50 units          │ 25 units             │
+├───────────────────────┼──────────────────────┼──────────────────────┤
+│ Site                  │ SubQ (abdomen)       │ SubQ (abdomen)       │
+└───────────────────────┴──────────────────────┴──────────────────────┘
+
+Due to longer half-life, twice-weekly dosing is effective. Can be combined with BPC-157 in same syringe.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- TB-500 requires more BAC water than smaller peptides (larger molecule at ~5 kDa)
+- 2 mL BAC per 10 mg vial = 5 mg/mL concentration → 2.5 mg dose = 0.5 mL (50 units)
+- Inject BAC water slowly down vial wall
+- Swirl gently — do not shake
+- Let sit 5-10 min to fully dissolve (may take longer than smaller peptides)
+- Store in fridge (2-8°C)
+- Use within 30 days once reconstituted` },
+  { heading: "Timeline", body: `Week 1 — Early anti-inflammatory effects. Some reduction in joint/tendon pain.
+Week 2-3 — Improved mobility and recovery from workouts or injuries.
+Week 3-4 — Noticeable tissue repair. Better wound healing. Reduced scar tissue formation.
+Week 4-6 — Peak effects on tendon/ligament healing and tissue remodelling.
+After stopping — Effects persist for several weeks due to long half-life. Gradually taper over 4-6 weeks.` },
+  { heading: "Side Effects", body: `Injection site reactions — Common (10-15%)
+→ Rotate sites. Use proper injection technique.
+
+Mild fatigue post-injection — Uncommon (5-10%)
+→ Transient. Usually resolves within 24 hours.
+
+⚠️ TB-500 promotes angiogenesis — caution with active cancer or cancer history.
+⚠️ WADA prohibited in competitive sport.
+
+Generally well-tolerated with minimal side effects at standard doses.` },
+  { heading: "Cycling", body: `Standard: 4-6 weeks on, 2-4 weeks off.
+Due to long half-life, effects persist after stopping — no need for frequent dosing.
+Loading phase followed by weekly maintenance is most efficient.
+Cycling is recommended to prevent potential desensitisation.` },
+  { heading: "Stacking", body: `The "Wolverine stack": TB-500 + BPC-157 — complementary tissue repair mechanisms. Most popular combination.
+Pairs well with: GHK-Cu — collagen synthesis + tissue repair via different pathways.
+Pairs well with: BPC-157 + GHK-Cu → the "Glow" stack for full spectrum repair.
+Pairs well with: CJC/Ipa or other GH peptides — GH supports protein synthesis and tissue repair.
+Avoid with: Other strong angiogenic compounds without medical supervision.` }
 ];
 
 const ALL_SEEDS = [
   { id: "seed-cjc-ipa", title: "CJC-1295 (No DAC) + Ipamorelin Protocol", category: "Protocol", sections: SEED_CJC_SECTIONS },
   { id: "seed-bpc157", title: "BPC-157 Protocol", category: "Protocol", sections: SEED_BPC157_SECTIONS },
   { id: "seed-retatrutide", title: "Retatrutide Protocol", category: "Protocol", sections: SEED_RETATRUTIDE_SECTIONS },
-  { id: "seed-semaglutide", title: "Semaglutide Protocol", category: "Protocol", sections: SEED_SEMAGLUTIDE_SECTIONS },
+  { id: "seed-ghkcu", title: "GHK-Cu Protocol", category: "Protocol", sections: SEED_GHKCU_SECTIONS },
+  { id: "seed-glow", title: "Glow Stack Protocol (GHK-Cu + BPC-157 + TB-500)", category: "Protocol", sections: SEED_GLOW_SECTIONS },
+  { id: "seed-mt2", title: "Melanotan II (MT-2) Protocol", category: "Protocol", sections: SEED_MT2_SECTIONS },
+  { id: "seed-nad", title: "NAD+ Protocol", category: "Protocol", sections: SEED_NAD_SECTIONS },
+  { id: "seed-selank", title: "Selank Protocol", category: "Protocol", sections: SEED_SELANK_SECTIONS },
+  { id: "seed-semax", title: "Semax Protocol", category: "Protocol", sections: SEED_SEMAX_SECTIONS },
+  { id: "seed-tb500", title: "TB-500 (Thymosin Beta-4) Protocol", category: "Protocol", sections: SEED_TB500_SECTIONS },
 ];
 
 // ── Content renderer ─────────────────────────────────────────
