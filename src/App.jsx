@@ -12,7 +12,7 @@ import KnowledgeBase from "./pages/KnowledgeBase";
 import PriceList from "./pages/PriceList";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { login as apiLogin, logout as apiLogout, loadData, getStoredUser } from "./utils/api";
+import { login as apiLogin, logout as apiLogout, loadData, getStoredUser, getSettings } from "./utils/api";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -26,10 +26,20 @@ function AppContent() {
     document.body.style.background = theme.bg;
   }, [theme]);
 
+  // Fetch settings from server and cache in localStorage for cross-device sync
+  const syncSettings = () => {
+    getSettings().then(remote => {
+      if (remote && typeof remote === 'object') {
+        localStorage.setItem('pims_settings', JSON.stringify(remote));
+      }
+    }).catch(() => {});
+  };
+
   useEffect(() => {
     const stored = getStoredUser();
     if (stored) setUser(stored);
     loadData().then(setData).catch(() => setData({ groups: [], items: [], invoices: [], stockHistory: [], protocols: [] }));
+    syncSettings();
   }, []);
 
   const login = async (username, password) => {
@@ -41,6 +51,7 @@ function AppContent() {
         const fresh = await loadData();
         setData(fresh);
       } catch { /* keep fallback data */ }
+      syncSettings();
       return true;
     } catch {
       return false;
