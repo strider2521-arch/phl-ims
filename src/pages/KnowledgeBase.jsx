@@ -28,7 +28,7 @@ const TEMPLATE_SECTIONS = [
   { key: "stacking", label: "Stacking", placeholder: "What pairs well, what to avoid, interactions…" },
 ];
 
-const SEED_SECTIONS = [
+const SEED_CJC_SECTIONS = [
   {
     heading: "Overview",
     body: `CJC-1295 (no DAC) is a GHRH analog that amplifies GH release pulses. Ipamorelin is a selective GH secretagogue that triggers a clean GH pulse without spiking cortisol or prolactin. Together they amplify the body's natural pulsatile GH release.
@@ -98,6 +98,167 @@ Fatigue / initial lethargy — Uncommon (<10%), first 1-2 weeks
     body: `Pairs well with: BPC-157, TB-500, MOTS-c, NAD+ therapy
 Use caution: MK-677 (insulin resistance risk), GHRP-6 (more sides), exogenous HGH`
   }
+];
+
+const SEED_BPC157_SECTIONS = [
+  { heading: "Overview", body: `BPC-157 (Body Protection Compound-157) is a synthetic pentadecapeptide (15 amino acids) derived from a protective protein found in human gastric juice. It is unusually stable in gastric acid, allowing both oral and injectable administration. It operates upstream in the tissue repair cascade by upregulating VEGF, EGF, and FGF — signalling cells to activate their own repair pathways.
+
+Route: Injectable (SubQ) or Oral  |  Half-life: ~4 hours (injectable)  |  Mechanism: Angiogenesis promotion, growth factor upregulation  |  Category: Tissue repair peptide` },
+  { heading: "Dosing Protocol", body: `┌───────────────────────────┬──────────────────────┬──────────────────────┐
+│                           │ Injectable (SubQ)     │ Oral                 │
+├───────────────────────────┼──────────────────────┼──────────────────────┤
+│ Standard dose             │ 250-500 mcg daily    │ 500 mcg - 1 mg ×2/day│
+├───────────────────────────┼──────────────────────┼──────────────────────┤
+│ Frequency                 │ 1× daily, 5 days/wk  │ 2× daily             │
+├───────────────────────────┼──────────────────────┼──────────────────────┤
+│ Injection site            │ Abdomen or near injury│ N/A                  │
+├───────────────────────────┼──────────────────────┼──────────────────────┤
+│ Protocol length           │ 4-12 weeks           │ 4-12 weeks           │
+├───────────────────────────┼──────────────────────┼──────────────────────┤
+│ Syringe draw (standard)   │ 10-20 units (0.1-0.2mL) │ N/A               │
+└───────────────────────────┴──────────────────────┴──────────────────────┘
+
+Injection: Subcutaneous into abdominal fat or near the injury site. Rotate sites. Use 29-31G, 0.5 inch insulin syringe.` },
+  { heading: "Reconstitution", body: `- Use bacteriostatic water (BAC water)
+- Inject BAC water slowly down vial wall — do not aim directly at powder
+- Swirl gently — do not shake
+- Let sit 5-10 min until fully dissolved
+- Store reconstituted in fridge (2-8°C)
+- Use within 30 days once reconstituted
+
+Common concentration: 1 mg/mL (2 mL BAC per 5 mg vial)` },
+  { heading: "Timeline", body: `Days 1-5 — Early anti-inflammatory window. Some patients report reduced pain.
+Weeks 1-2 — Initial anecdotal signal: improved mobility, reduced pain scores.
+Weeks 4-6 — Animal-documented tissue remodelling window. Tendon-to-bone integration begins.
+Weeks 8-12 — Chronic injury protocol duration. Gut protocols often show response by week 6.
+After protocol — Effects diminish over 3-6 months after stopping. Gut healing may persist longer.` },
+  { heading: "Side Effects", body: `Injection site redness/swelling — Common (5-15%), weeks 1-2
+→ Rotate injection sites. Use abdomen rather than thigh.
+
+Nausea (oral only) — Uncommon (5-10%), first week
+→ Take 30 min before food on empty stomach. Not applicable for injectable.
+
+Mild transient headache — Rare (<5%), days 1-3
+→ Usually resolves within 24-48 hours without intervention.
+
+⚠️ Contraindicated in active cancer or cancer history — angiogenesis mechanism precludes use.` },
+  { heading: "Cycling", body: `Common community protocol: 4-8 weeks on, 2-4 weeks off.
+For chronic injuries: 8-12 weeks may be warranted.
+After protocol: take a break of at least equal duration before reassessment.
+No strong evidence for mandatory cycling — the 4-on/4-off convention is entirely community-based.` },
+  { heading: "Stacking", body: `Pairs well with: TB-500 (Thymosin Beta-4) — the 'Wolverine stack', complementary tissue repair mechanisms
+Pairs well with: GHK-Cu (copper peptide) — collagen synthesis, topical
+Pairs well with: Collagen peptides (oral) — provides raw material for BPC-157 signalling
+Use caution: PRP (Platelet-Rich Plasma) — no head-to-head evidence` }
+];
+
+const SEED_RETATRUTIDE_SECTIONS = [
+  { heading: "Overview", body: `Retatrutide (LY-3437943) is an experimental triple hormone receptor agonist developed by Eli Lilly. It simultaneously targets GLP-1, GIP, and glucagon receptors — making it the first triple-agonist in its class for obesity and metabolic disease.
+
+Mechanism: GLP-1 improves insulin sensitivity + satiety. GIP enhances energy expenditure. Glucagon agonism promotes fat loss and metabolic activity. Together: reduced caloric intake + increased energy expenditure.
+
+Status: Investigational — Phase 3 trials completed 2026  |  Half-life: ~6 days (once-weekly dosing)  |  Route: Subcutaneous injection` },
+  { heading: "Dosing Protocol", body: `┌──────────────────────┬────────────────────┬─────────────────────┐
+│                      │ Titration (Wk 1-4)  │ Maintenance         │
+├──────────────────────┼────────────────────┼─────────────────────┤
+│ Starting dose        │ 2 mg once weekly   │ 4-12 mg once weekly │
+├──────────────────────┼────────────────────┼─────────────────────┤
+│ Escalation           │ Increase by 2 mg   │ Based on tolerance  │
+│                      │ every 4 weeks      │ and response        │
+├──────────────────────┼────────────────────┼─────────────────────┤
+│ Max dose studied     │ —                  │ 12 mg once weekly   │
+├──────────────────────┼────────────────────┼─────────────────────┤
+│ Injection site       │ Subcutaneous       │ Subcutaneous        │
+│                      │ (abdomen/thigh)    │ (abdomen/thigh)     │
+└──────────────────────┴────────────────────┴─────────────────────┘
+
+Administer once weekly, same day each week. Rotate injection sites.` },
+  { heading: "Reconstitution", body: `Retatrutide is supplied as a solution for injection — no reconstitution required.
+- Store in fridge (2-8°C)
+- Do not freeze
+- Protect from light
+- Use by expiration date on vial` },
+  { heading: "Timeline", body: `Weeks 1-4 — Appetite suppression begins. Reduced caloric intake. Mild GI side effects possible.
+Weeks 4-8 — Visible weight loss typically begins. Dose may be increased at week 4.
+Week 24 (Phase 2 data) — Up to 17.5% mean weight reduction at 24 weeks.
+Week 48-72 (Phase 3 data) — 15-24% mean weight loss depending on dose.
+Ongoing — HbA1c improvement in T2D patients. Cardiometabolic benefits.` },
+  { heading: "Side Effects", body: `Nausea — Very common (40-60%), especially during titration
+→ Dose-dependent. Eat smaller meals. Usually improves over time.
+
+Diarrhoea — Common (20-35%)
+→ Stay hydrated. Usually transient.
+
+Vomiting — Common (10-20%), higher at max doses
+→ Slow titration reduces risk.
+
+Constipation — Common (10-20%)
+→ Increase fibre and water intake.
+
+Abdominal discomfort — Common (10-20%)
+→ Typically mild-moderate.
+
+⚠️ Potential risks: Pancreatitis, gallbladder disease, increased heart rate (mild, dose-dependent).` },
+  { heading: "Cycling", body: `Designed for continuous once-weekly use — not cycled like research peptides.
+Dose follows a structured titration escalation schedule.
+If discontinuing: taper down gradually under physician guidance.` },
+  { heading: "Stacking", body: `May be combined with: Metformin (for T2D) — under physician supervision.
+Caution with: Other GLP-1 agonists (semaglutide, tirzepatide) — redundant mechanism, increased side effect risk.
+No research peptide stacking data available.` }
+];
+
+const SEED_SEMAGLUTIDE_SECTIONS = [
+  { heading: "Overview", body: `Semaglutide is a GLP-1 receptor agonist developed by Novo Nordisk. FDA-approved for type 2 diabetes (Ozempic, Rybelsus) and obesity (Wegovy). It mimics GLP-1 hormone to increase insulin secretion, slow gastric emptying, and reduce appetite.
+
+Mechanism: GLP-1 receptor agonist  |  Half-life: ~7 days (once-weekly dosing)  |  Route: Subcutaneous or Oral  |  FDA status: Approved` },
+  { heading: "Dosing Protocol", body: `┌──────────────────────────┬──────────────────────┬──────────────────────┐
+│                          │ Weight Loss (Wegovy)  │ T2D (Ozempic)        │
+├──────────────────────────┼──────────────────────┼──────────────────────┤
+│ Starting dose            │ 0.25 mg once weekly  │ 0.25 mg once weekly  │
+├──────────────────────────┼──────────────────────┼──────────────────────┤
+│ Titration                │ Increase every 4 wks │ Increase every 4 wks │
+├──────────────────────────┼──────────────────────┼──────────────────────┤
+│ Maintenance dose         │ 1.7 - 2.4 mg weekly  │ 0.5 - 1.0 mg weekly  │
+├──────────────────────────┼──────────────────────┼──────────────────────┤
+│ Max dose                 │ 2.4 mg once weekly   │ 1.0 mg once weekly   │
+├──────────────────────────┼──────────────────────┼──────────────────────┤
+│ Administration           │ Subcutaneous          │ Subcutaneous         │
+└──────────────────────────┴──────────────────────┴──────────────────────┘
+
+Titration (Wegovy): 0.25mg → 0.5mg → 1.0mg → 1.7mg → 2.4mg, 4 weeks per step.` },
+  { heading: "Reconstitution", body: `Semaglutide is supplied as a pre-filled pen or tablet — no reconstitution required.
+- Store in fridge (2-8°C) before first use
+- After first use: up to 56 days (Ozempic) / 28 days (Wegovy) at room temp or fridge
+- Do not freeze` },
+  { heading: "Timeline", body: `Weeks 1-4 — Appetite suppression begins at 0.25mg. Mild side effects as body adjusts.
+Weeks 4-8 — Dose increases. More noticeable appetite reduction. Early weight loss begins.
+Week 12+ — Significant weight loss visible at therapeutic doses (1.0mg+).
+Month 6 — Average 10-15% weight loss (Wegovy) / 0.5-1.0% HbA1c reduction (Ozempic).
+Month 12+ — Sustained results with continued use. Weight may plateau.` },
+  { heading: "Side Effects", body: `Nausea — Very common (30-50%), especially during titration
+→ Dose-dependent. Eat smaller, bland meals. Improves over weeks.
+
+Diarrhoea — Common (15-25%) — Usually transient during titration.
+Vomiting — Common (10-15%) — Slow titration reduces risk.
+Constipation — Common (10-15%) — Increase water, fibre, activity.
+Abdominal pain — Common (5-10%) — Typically mild.
+
+⚠️ Boxed warning: Thyroid C-cell tumour risk (rare). Pancreatitis risk. Gallbladder disease.
+⚠️ Does NOT cause hypoglycemia alone — risk increases with insulin / sulfonylureas.` },
+  { heading: "Cycling", body: `FDA-approved continuous therapy — not cycled.
+Designed for long-term weekly use for chronic conditions (T2D, obesity).
+If stopping: appetite returns, weight regain is common. Taper under physician guidance.` },
+  { heading: "Stacking", body: `Standard (pharmaceutical): Metformin, SGLT2 inhibitors, insulin (T2D) — under physician supervision.
+Caution: Other GLP-1 agonists (tirzepatide, retatrutide) — redundant, increased side effects.
+Avoid: DPP-4 inhibitors (e.g. sitagliptin) — same mechanism, no added benefit.
+Research peptides: Limited data. Caution with GH peptides.` }
+];
+
+const ALL_SEEDS = [
+  { id: "seed-cjc-ipa", title: "CJC-1295 (No DAC) + Ipamorelin Protocol", category: "Protocol", sections: SEED_CJC_SECTIONS },
+  { id: "seed-bpc157", title: "BPC-157 Protocol", category: "Protocol", sections: SEED_BPC157_SECTIONS },
+  { id: "seed-retatrutide", title: "Retatrutide Protocol", category: "Protocol", sections: SEED_RETATRUTIDE_SECTIONS },
+  { id: "seed-semaglutide", title: "Semaglutide Protocol", category: "Protocol", sections: SEED_SEMAGLUTIDE_SECTIONS },
 ];
 
 // ── Content renderer ─────────────────────────────────────────
@@ -313,8 +474,11 @@ export default function KnowledgeBase() {
 
   useEffect(() => {
     let existing = loadDocs();
-    if (existing.length === 0) {
-      existing = [{ id: "seed-cjc-ipa", title: "CJC-1295 (No DAC) + Ipamorelin Protocol", category: "Protocol", sections: SEED_SECTIONS, created_at: Date.now(), updated_at: Date.now() }];
+    const existingIds = new Set(existing.map(d => d.id));
+    const missing = ALL_SEEDS.filter(s => !existingIds.has(s.id))
+      .map(s => ({ ...s, created_at: Date.now(), updated_at: Date.now() }));
+    if (existing.length === 0 || missing.length > 0) {
+      existing = [...missing, ...existing];
       saveDocs(existing);
     }
     setDocs(existing);
