@@ -9,6 +9,7 @@ import Invoices from "./pages/Invoices";
 import CreateInvoice from "./pages/CreateInvoice";
 import Settings from "./pages/Settings";
 import KnowledgeBase from "./pages/KnowledgeBase";
+import PriceList from "./pages/PriceList";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { login as apiLogin, logout as apiLogout, loadData, getStoredUser } from "./utils/api";
@@ -71,6 +72,7 @@ function AppContent() {
           {page === "inventory" && <Inventory />}
           {page === "invoices" && <Invoices setPage={setPage} setEditingInvoice={setEditingInvoice} />}
           {page === "create-invoice" && <CreateInvoice setPage={setPage} editingInvoice={editingInvoice} setEditingInvoice={setEditingInvoice} />}
+          {page === "pricelist" && <PriceList />}
           {page === "settings" && <Settings />}
         </Layout>
       </DataContext.Provider>
