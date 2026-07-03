@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "../contexts/ThemeContext";
+import * as api from "../utils/api";
 
 const STORAGE_KEY = 'pims_settings';
 
-function loadSettings() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-  } catch { return {}; }
+function loadLocal() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch { return {}; }
 }
 
-function saveSettings(s) {
+function saveLocal(s) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
 }
 
@@ -20,15 +20,31 @@ const inputStyle = (theme) => ({
 
 export default function Settings() {
   const { theme } = useTheme();
-  const settings = loadSettings();
-  const [logo, setLogo] = useState(settings.logo || '');
-  const [logoWidth, setLogoWidth] = useState(settings.logoWidth || 120);
-  const [invoicePrefix, setInvoicePrefix] = useState(settings.invoicePrefix || 'INV-');
-  const [companyName, setCompanyName] = useState(settings.companyName || 'Prime Helix');
-  const [companyEmail, setCompanyEmail] = useState(settings.companyEmail || '');
-  const [companyAddress, setCompanyAddress] = useState(settings.companyAddress || '');
-  const [defaultNotes, setDefaultNotes] = useState(settings.defaultNotes || '');
+  const local = loadLocal();
+  const [logo, setLogo] = useState(local.logo || '');
+  const [logoWidth, setLogoWidth] = useState(local.logoWidth || 120);
+  const [invoicePrefix, setInvoicePrefix] = useState(local.invoicePrefix || 'INV-');
+  const [companyName, setCompanyName] = useState(local.companyName || 'Prime Helix');
+  const [companyEmail, setCompanyEmail] = useState(local.companyEmail || '');
+  const [companyAddress, setCompanyAddress] = useState(local.companyAddress || '');
+  const [defaultNotes, setDefaultNotes] = useState(local.defaultNotes || '');
   const [saved, setSaved] = useState(false);
+
+  // Load settings from server on mount — merges with local cache
+  useEffect(() => {
+    api.getSettings().then(remote => {
+      if (remote && typeof remote === 'object') {
+        if (remote.logo) setLogo(remote.logo);
+        if (remote.logoWidth) setLogoWidth(remote.logoWidth);
+        if (remote.invoicePrefix) setInvoicePrefix(remote.invoicePrefix);
+        if (remote.companyName) setCompanyName(remote.companyName);
+        if (remote.companyEmail) setCompanyEmail(remote.companyEmail);
+        if (remote.companyAddress) setCompanyAddress(remote.companyAddress);
+        if (remote.defaultNotes !== undefined) setDefaultNotes(remote.defaultNotes);
+        saveLocal(remote);
+      }
+    }).catch(() => {/* use local fallback */});
+  }, []);
 
   function handleLogoUpload(e) {
     const file = e.target.files?.[0];
@@ -42,7 +58,9 @@ export default function Settings() {
   }
 
   function handleSave() {
-    saveSettings({ logo, logoWidth, invoicePrefix, companyName, companyEmail, companyAddress, defaultNotes });
+    const data = { logo, logoWidth, invoicePrefix, companyName, companyEmail, companyAddress, defaultNotes };
+    saveLocal(data);
+    api.putSettings(data).catch(() => {});
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   }

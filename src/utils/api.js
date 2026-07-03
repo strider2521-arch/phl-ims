@@ -144,3 +144,16 @@ export async function updateInvoiceStatus(id, status) {
     body: JSON.stringify({ status })
   });
 }
+
+// ── Settings (synced across devices) ─────────────
+
+export async function getSettings() {
+  return request('/settings');
+}
+
+export async function putSettings(data) {
+  return request('/settings', {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  });
+}

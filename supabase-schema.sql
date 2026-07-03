@@ -73,6 +73,19 @@ CREATE TABLE IF NOT EXISTS stock_history (
   note TEXT DEFAULT ''
 );
 
+-- ── App Settings (synced across devices) ──────────────────────
+
+CREATE TABLE IF NOT EXISTS app_settings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  data JSONB NOT NULL DEFAULT '{}'::jsonb,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Seed default settings row if empty
+INSERT INTO app_settings (id, data)
+SELECT gen_random_uuid(), '{}'::jsonb
+WHERE NOT EXISTS (SELECT 1 FROM app_settings);
+
 -- ── Indexes ────────────────────────────────────────────────────
 
 CREATE INDEX IF NOT EXISTS idx_items_group ON items(group_id);
