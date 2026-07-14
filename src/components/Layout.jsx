@@ -33,7 +33,7 @@ export default function Layout({ children, page, setPage }) {
       .pims-sidebar { position: fixed; top: 0; left: 0; z-index: 100; transform: translateX(-100%); transition: transform 0.25s ease; }
       .pims-sidebar.open { transform: translateX(0); background: ${theme.bg} !important; }
       .pims-main { padding: 16px; padding-top: 56px; }
-      .pims-hamburger { display: block; position: fixed; top: 10px; left: 10px; z-index: 200; background: ${theme.bgSecondary}; border-radius: 6px; }
+      .pims-hamburger { display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 10px 12px; justify-content: space-between; align-items: center; background: ${theme.bg}; border-bottom: 1px solid ${theme.border}; }
     }
   `;
 
@@ -44,6 +44,18 @@ export default function Layout({ children, page, setPage }) {
       <div style={{ padding: "0 20px 24px", borderBottom: g('border') }}>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: theme.accent, letterSpacing: 3, marginBottom: 4 }}>PRIME HELIX</div>
         <div style={{ fontSize: 13, color: theme.textSecondary, letterSpacing: 1 }}>IMS v2.0</div>
+      </div>
+
+      {/* User + Sign out — at top for mobile accessibility */}
+      <div style={{ padding: "14px 20px", borderBottom: g('border'), display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+        <div>
+          <div style={{ fontSize: 12, color: theme.text, fontWeight: 600 }}>{user?.username}</div>
+          <div style={{ fontSize: 10, color: theme.accent, letterSpacing: 1 }}>{user?.role?.toUpperCase()}</div>
+        </div>
+        <button onClick={logout} style={{
+          fontSize: 11, color: theme.danger, background: "transparent",
+          border: `1px solid ${theme.dangerBorder}`, padding: "5px 10px", cursor: "pointer", borderRadius: 6
+        }}>Sign out</button>
       </div>
 
       <div style={{ padding: "14px 20px", borderBottom: g('border') }}>
@@ -81,16 +93,10 @@ export default function Layout({ children, page, setPage }) {
         <button onClick={toggleTheme} style={{
           fontSize: 11, color: theme.textSecondary, background: theme.glass,
           border: g('glassBorder'), padding: "6px 10px", cursor: "pointer",
-          width: "100%", marginBottom: 10, borderRadius: 6,
+          width: "100%", borderRadius: 6,
         }}>
           {theme.name === "dark" ? "☀️ Light" : "🌙 Dark"}
         </button>
-        <div style={{ fontSize: 12, color: theme.text, marginBottom: 2 }}>{user?.username}</div>
-        <div style={{ fontSize: 10, color: theme.accent, marginBottom: 10, letterSpacing: 1 }}>{user?.role?.toUpperCase()}</div>
-        <button onClick={logout} style={{
-          fontSize: 11, color: theme.textSecondary, background: "transparent",
-          border: g('border'), padding: "5px 10px", cursor: "pointer", borderRadius: 6, width: "100%",
-        }}>Sign out</button>
       </div>
     </>
   );
@@ -100,12 +106,16 @@ export default function Layout({ children, page, setPage }) {
       <style>{styles}</style>
 
       <div className="pims-root">
-        {/* Hamburger — only visible on mobile */}
+        {/* Hamburger + mobile header */}
         <div className="pims-hamburger">
           <button onClick={() => setMobileOpen(true)} style={{
             background: theme.bgSecondary, border: g('border'), color: theme.text,
             fontSize: 18, padding: "6px 10px", cursor: "pointer", borderRadius: 6,
           }}>☰</button>
+          <button onClick={logout} style={{
+            background: "transparent", border: `1px solid ${theme.dangerBorder}`, color: theme.danger,
+            fontSize: 11, padding: "6px 10px", cursor: "pointer", borderRadius: 6,
+          }}>Sign out</button>
         </div>
 
         {/* Mobile overlay */}

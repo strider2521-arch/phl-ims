@@ -37,8 +37,20 @@ function AppContent() {
 
   useEffect(() => {
     const stored = getStoredUser();
-    if (stored) setUser(stored);
-    loadData().then(setData).catch(() => setData({ groups: [], items: [], invoices: [], stockHistory: [], protocols: [] }));
+    if (stored) {
+      // Try loading data with stored token — if it fails the token is expired
+      loadData().then(fresh => {
+        setUser(stored);
+        setData(fresh);
+      }).catch(() => {
+        // Token expired or invalid — force re-login
+        apiLogout();
+        setData({ groups: [], items: [], invoices: [], stockHistory: [], protocols: [] });
+      });
+    } else {
+      // No stored user — show login page
+      setData({ groups: [], items: [], invoices: [], stockHistory: [], protocols: [] });
+    }
     syncSettings();
   }, []);
 
@@ -46,11 +58,8 @@ function AppContent() {
     try {
       const u = await apiLogin(username, password);
       setUser(u);
-      // Reload data now that we have a valid session token
-      try {
-        const fresh = await loadData();
-        setData(fresh);
-      } catch { /* keep fallback data */ }
+      const fresh = await loadData();
+      setData(fresh);
       syncSettings();
       return true;
     } catch {
